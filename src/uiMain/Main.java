@@ -3,14 +3,44 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import BaseDatos.Persistencia;
+import GUI.VentanaInicio;
 import gestorAplicacion.cliente.*;
 import gestorAplicacion.factura.*;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 
 
 
-public class Main {
-	
+public class Main extends Application{
+	Scene scene, scene1, scene2;
+	Stage window;
+	Label Hvida;
+	int contador=0;
+	ImageView v1;
 	static Scanner entrada = new Scanner(System.in);
 	static {
 		Persistencia.leerArchivos();
@@ -20,7 +50,7 @@ public class Main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		
+		launch(args);
 	    int numero;
 		
 		do {
@@ -105,6 +135,162 @@ public class Main {
       
 
 	}
+	
+	public void start(Stage myStage) throws Exception{
+		window = myStage;
+		window.setTitle("Aplicacion");
+		BorderPane borde = new BorderPane();
+		borde.setPadding(new Insets(10,10,10,10));
+		
+		//parte izquierda ventana de inicio
+		VBox p1 = new VBox(20);
+		p1.setPadding(new Insets(10,10,10,10));
+		Label text = new Label("Bienvenidos a CompuElectronics");
+		text.setFont(new Font("Arial",15));
+		text.setAlignment(Pos.CENTER);
+		
+		Button b1 = new Button("Siguiente");
+		b1.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				window.setScene(scene2);
+			}
+			
+		});
+		
+		Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+		rt.setStroke(Color.GRAY);
+		StackPane sp = new StackPane(new Node[] { rt, text });
+		
+		BorderPane p4 = new BorderPane();
+		p4.setPadding(new Insets(10,10,10,10));
+		Insets i = new Insets(10);
+		
+		Image image = new Image(getClass().getResourceAsStream("../imagenes/celular.jpg"));
+		ImageView v = new ImageView();
+		v.setImage(image);
+		v.setFitWidth(135);
+		v.setFitHeight(150);
+		
+		p4.setAlignment(b1, Pos.BOTTOM_RIGHT);
+		p4.setBottom(b1);
+		p4.setMargin(b1, i);
+		
+		p4.setCenter(v);
+		p4.setMargin(v, i);
+		
+		p1.setAlignment(Pos.TOP_CENTER);
+		p1.getChildren().addAll(sp,p4);
+		
+		//parte derecha Ventana de inicio
+		VBox p2 = new VBox(20);
+		p2.setPadding(new Insets(10,10,10,10));
+		
+		HBox p5 = new HBox();
+		p5.setPadding(new Insets(10,10,10,10));
+		p5.setAlignment(Pos.TOP_CENTER);
+		
+		Hvida = new Label("Nombre: Daniel Torres"
+				+ "\nCorreo: dtorresag@unal.edu.co"
+				+ "\nCarrera: Ingenieria en sistemas"
+				+ "\nPasatiempo: Dibujar");
+		
+		p5.getChildren().addAll(Hvida);
+		p5.setOnMouseClicked(mouseHvida);
+		
+		GridPane p6 = new GridPane();
+		p6.setVgap(5.0D);
+	    p6.setHgap(4.0D);
+	    
+	    Image m1 = new Image(getClass().getResourceAsStream("../imagenes/daniel.jpg"));
+	    v1 = new ImageView();
+	    v1.setImage(m1);
+	    v1.setFitWidth(135);
+		v1.setFitHeight(150);
+	    p6.add(v1, 0, 0);
+		
+		p2.getChildren().addAll(p5,p6);
+		
+		//menu
+		//Manejo de la barra de menú de la ventana
+		MenuBar barraMenu = new MenuBar();
+		//Definición del Menu
+		Menu menu1 = new Menu("Menu");
+		barraMenu.getMenus().add(menu1); //se añade el menu1 a la barra de menu
+		//Se adiciona los elementos de menu1
+		MenuItem menuItem1 = new MenuItem("Descripcion");
+		MenuItem menuItem2 = new MenuItem("Salir");
+		SeparatorMenuItem separator = new SeparatorMenuItem();//linea de separación de menus
+		menu1.getItems().add(menuItem1);
+		menu1.getItems().addAll(separator, menuItem2);
+		
+		
+		
+		borde.setRight(p2);
+		borde.setMargin(p2, i);
+		borde.setLeft(p1);
+		borde.setMargin(p1, i);
+		borde.setTop(barraMenu);
+		
+		 scene1 = new Scene(borde,600,400);
+		
+		VBox p = new VBox(20);
+		Label text2 = new Label("ventana principal");
+		text2.setFont(new Font("Arial",15));
+		text2.setAlignment(Pos.CENTER);
+		
+		Button b2 = new Button("atras");
+		b2.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				window.setScene(scene1);			
+			}
+			
+		});
+		
+		p.setAlignment(Pos.CENTER);
+		p.getChildren().addAll(text2,b2);
+		
+		scene2 = new Scene(p,600,600);
+		
+		scene = scene1;
+		
+		window.setScene(scene);
+		window.show();
+	}
+	
+	EventHandler<MouseEvent> mouseHvida = new EventHandler<MouseEvent>() {
+
+		@Override
+		public void handle(MouseEvent arg0) {
+			if(contador==0) {
+				Hvida.setText("Nombre: Deninson Chamorro"
+						+ "\nCorreo: dachamorroru@unal.edu.co"
+						+ "\nCarrera: Ingenieria en sistemas"
+						+ "\nPasatiempo: futbol");
+				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/deninson.jpg")));
+				contador++;
+			}else if(contador==1) {
+				Hvida.setText("Nombre: Deyner Lopez"
+						+ "\nCorreo: dachamorroru@unal.edu.co"
+						+ "\nCarrera: Ingenieria en sistemas"
+						+ "\nPasatiempo: futbol");
+				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner.jpg")));
+				contador++;
+			}else if(contador==2) {
+				Hvida.setText("Nombre: Daniel Torres"
+						+ "\nCorreo: dtorresag@unal.edu.co"
+						+ "\nCarrera: Ingenieria en sistemas"
+						+ "\nPasatiempo: Dibujar");
+				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel.jpg")));
+				contador=0;
+			}
+			
+		}
+		
+	};
 	
 	static void registrarCliente() {
 		
