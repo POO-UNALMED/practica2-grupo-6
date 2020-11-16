@@ -253,7 +253,7 @@ public class Main extends Application{
 		p.setAlignment(Pos.CENTER);
 		p.getChildren().addAll(text2,b2);
 		
-		scene2 = new Scene(p,600,600);
+		scene2 = new Scene(p,600,400);
 		
 		scene = scene1;
 		
