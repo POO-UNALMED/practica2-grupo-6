@@ -7,12 +7,15 @@ import GUI.VentanaInicio;
 import gestorAplicacion.cliente.*;
 import gestorAplicacion.factura.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -41,6 +44,7 @@ public class Main extends Application{
 	Label Hvida;
 	int contador=0;
 	ImageView v1;
+	
 	static Scanner entrada = new Scanner(System.in);
 	static {
 		Persistencia.leerArchivos();
@@ -51,7 +55,7 @@ public class Main extends Application{
 		// TODO Auto-generated method stub
 		
 		launch(args);
-	    int numero;
+		int numero;
 		
 		do {
 			
@@ -170,8 +174,8 @@ public class Main extends Application{
 		Image image = new Image(getClass().getResourceAsStream("../imagenes/celular.jpg"));
 		ImageView v = new ImageView();
 		v.setImage(image);
-		v.setFitWidth(135);
-		v.setFitHeight(150);
+		v.setFitWidth(185);
+		v.setFitHeight(200);
 		
 		p4.setAlignment(b1, Pos.BOTTOM_RIGHT);
 		p4.setBottom(b1);
@@ -195,6 +199,7 @@ public class Main extends Application{
 				+ "\nCorreo: dtorresag@unal.edu.co"
 				+ "\nCarrera: Ingenieria en sistemas"
 				+ "\nPasatiempo: Dibujar");
+		Hvida.setFont(new Font("Arial",13));
 		
 		p5.getChildren().addAll(Hvida);
 		p5.setOnMouseClicked(mouseHvida);
@@ -225,7 +230,8 @@ public class Main extends Application{
 		menu1.getItems().add(menuItem1);
 		menu1.getItems().addAll(separator, menuItem2);
 		
-		
+		menuItem1.setOnAction(menu);
+		menuItem2.setOnAction(menu);
 		
 		borde.setRight(p2);
 		borde.setMargin(p2, i);
@@ -233,7 +239,7 @@ public class Main extends Application{
 		borde.setMargin(p1, i);
 		borde.setTop(barraMenu);
 		
-		 scene1 = new Scene(borde,600,400);
+		 scene1 = new Scene(borde,700,500);
 		
 		VBox p = new VBox(20);
 		Label text2 = new Label("ventana principal");
@@ -260,6 +266,34 @@ public class Main extends Application{
 		window.setScene(scene);
 		window.show();
 	}
+	
+	public void stop() {
+		System.out.println("la app se cerro");
+		
+	}
+	
+	EventHandler<ActionEvent> menu = new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent a) {
+			Object cont = a.getSource();
+			if(cont instanceof MenuItem) {
+				if((((MenuItem) cont).getText()).equals("Descripcion")) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Acerca de CompuElectronics");
+					alert.setHeaderText(null);
+					alert.setContentText("La aplicacion fue diseñada con el proposito"
+							+ "\nde tener un control de la entrada y salida de"
+							+ "\ndatos de una tienda");
+					alert.showAndWait();
+				}else if((((MenuItem) cont).getText()).equals("Salir")) {
+					Platform.exit();
+				}
+			}
+			
+		}
+		
+	};
 	
 	EventHandler<MouseEvent> mouseHvida = new EventHandler<MouseEvent>() {
 
