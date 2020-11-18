@@ -25,10 +25,11 @@ public class VentanaPrincipal extends BorderPane {
 	
 	VBox consultas;
 	Label nombre, descripcion;
+	Insets i = new Insets(10);
 	
 	public VentanaPrincipal() {
 		super();
-		Insets i = new Insets(10);
+		
 		//barra menu
 		MenuBar barra = new MenuBar();
 		//archivo
@@ -54,7 +55,7 @@ public class VentanaPrincipal extends BorderPane {
 		Menu menu2 = new Menu("Procesos y Consultas");
 		MenuItem op1 = new MenuItem("Registrar Administrador");
 		MenuItem op2 = new MenuItem("Registrar Cliente");
-		MenuItem op3 = new MenuItem("Usuario");
+		MenuItem op3 = new MenuItem("Registrar Producto");
 		MenuItem op4 = new MenuItem("Crear Pedido");
 		Menu op5 = new Menu("Inventario");
 		//Inventario
@@ -67,6 +68,8 @@ public class VentanaPrincipal extends BorderPane {
 		MenuItem op9 = new MenuItem("Balances");
 		MenuItem op10 = new MenuItem("Productos Mas Vendidos");
 		menu2.getItems().addAll(op1,op2,op3,op4,op5,op6,op7,op8,op9,op10);
+		
+		op2.setOnAction(menu);
 		
 		//Ayuda
 		Menu menu3 = new Menu("Ayuda");
@@ -119,8 +122,36 @@ public class VentanaPrincipal extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent a) {
-			// TODO Auto-generated method stub
 			Object cont = a.getSource();
+			if (cont instanceof MenuItem) {
+				if((((MenuItem) cont).getText()).equals("Registrar Cliente")) {
+					consultas = new VBox(10);
+					nombre.setText("Registrar Cliente");
+					descripcion.setText("Funcion realizada para registrar los clientes que operan en la tienda");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"Nombre","Identificacion","Correo","Direccion","Telefono","Genero"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+					
+				}
+			}
 		}
 		
 	};

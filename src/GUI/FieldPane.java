@@ -53,6 +53,8 @@ public class FieldPane extends HBox {
 		    	panel.add(campo, 3, i+1);
 		    	
 			}
+	    }else {
+	    	
 	    }
 	    
 	    
