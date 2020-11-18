@@ -96,12 +96,33 @@ public class VentanaPrincipal extends BorderPane {
 		rt1.setStroke(Color.GRAY);
 		StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
 		
+		//campos
+		
+		String[] criterios = {"Nombre","Identificacion","Correo","Direccion","Telefono","Genero","Salario","Profesion"};
+		BorderPane panel = new BorderPane();
+		panel.setAlignment(panel, Pos.CENTER);
+		panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+		
+		Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+		rt2.setStroke(Color.GRAY);
+		StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+		
 		consultas.setAlignment(Pos.CENTER);
-		consultas.getChildren().addAll(sp,sp1);
+		consultas.getChildren().addAll(sp,sp1,sp2);
 		
 		setCenter(consultas);
 		setMargin(consultas, i);
 		
 	}
+	
+	EventHandler<ActionEvent> menu = new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent a) {
+			// TODO Auto-generated method stub
+			Object cont = a.getSource();
+		}
+		
+	};
 
 }
