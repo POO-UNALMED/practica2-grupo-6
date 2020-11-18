@@ -38,6 +38,8 @@ public class VentanaPrincipal extends BorderPane {
 		//archivo
 		Menu menu1 = new Menu("Archivo");
 		MenuItem usuario = new MenuItem("Usuario");
+		//acionar boton usuario
+		usuario.setOnAction(menu);
 		SeparatorMenuItem separator = new SeparatorMenuItem();
 		MenuItem salir = new MenuItem("Salir");
 		menu1.getItems().addAll(usuario,separator, salir);
@@ -405,6 +407,19 @@ public class VentanaPrincipal extends BorderPane {
 				}
 				
 				
+				
+				//
+				//usuario
+				else if((((MenuItem) cont).getText()).equals("Usuario")) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Usuario de CompuElectronics");
+					alert.setHeaderText(null);
+					alert.setContentText("Aplicacion --CompuElectronics---"
+							+ "\nMonoUsuario"
+							+ "\nVersion 2.1");
+					alert.showAndWait();
+					
+				}
 				
 				//
 				
