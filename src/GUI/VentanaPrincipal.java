@@ -79,7 +79,7 @@ public class VentanaPrincipal extends BorderPane {
 		setMargin(barra, i);
 		
 		//Formularios
-		consultas = new VBox(20);
+		consultas = new VBox(10);
 		nombre = new Label("Registrar Administrador");
 		nombre.setFont(new Font("Arial",16));
 		nombre.setAlignment(Pos.CENTER);
