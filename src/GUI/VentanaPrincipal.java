@@ -7,12 +7,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -70,6 +72,7 @@ public class VentanaPrincipal extends BorderPane {
 		MenuItem op10 = new MenuItem("Productos Mas Vendidos");
 		menu2.getItems().addAll(op1,op2,op3,op4,op5,op6,op7,op8,op9,op10);
 		
+		
 		op2.setOnAction(menu);
 		op3.setOnAction(menu);
 		op4.setOnAction(menu);
@@ -81,10 +84,16 @@ public class VentanaPrincipal extends BorderPane {
 		op9.setOnAction(menu);
 		op10.setOnAction(menu);
 		
+		
 		//Ayuda
 		Menu menu3 = new Menu("Ayuda");
 		MenuItem Acerca = new MenuItem("Acerca de");
 		menu3.getItems().add(Acerca);
+		//activar boton de acerca
+		Acerca.setOnAction(menu);
+		
+		
+		
 		
 		barra.getMenus().addAll(menu1,menu2,menu3);
 		
@@ -382,6 +391,24 @@ public class VentanaPrincipal extends BorderPane {
 					setMargin(consultas, i);
 					
 				}
+				
+				//Acerca de
+				else if((((MenuItem) cont).getText()).equals("Acerca de")) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Acerca de CompuElectronics");
+					alert.setHeaderText(null);
+					alert.setContentText("La aplicacion fue diseñada con el proposito"
+							+ "\nde tener un control de la entrada y salida de"
+							+ "\ndatos de una tienda");
+					alert.showAndWait();
+					
+				}
+				
+				
+				
+				//
+				
+				
 			}
 			
 			

@@ -154,6 +154,7 @@ public class Main extends Application{
 	
 	public void stop() {
 		System.out.println("la app se cerro");
+		System.out.println("0");
 		
 	}	
 	
