@@ -1,5 +1,6 @@
 package GUI;
 
+import gestorAplicacion.factura.Producto;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -70,6 +71,15 @@ public class VentanaPrincipal extends BorderPane {
 		menu2.getItems().addAll(op1,op2,op3,op4,op5,op6,op7,op8,op9,op10);
 		
 		op2.setOnAction(menu);
+		op3.setOnAction(menu);
+		op4.setOnAction(menu);
+		ver.setOnAction(menu);
+		editar.setOnAction(menu);
+		op6.setOnAction(menu);
+		op7.setOnAction(menu);
+		op8.setOnAction(menu);
+		op9.setOnAction(menu);
+		op10.setOnAction(menu);
 		
 		//Ayuda
 		Menu menu3 = new Menu("Ayuda");
@@ -137,7 +147,228 @@ public class VentanaPrincipal extends BorderPane {
 					rt1.setStroke(Color.GRAY);
 					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
 					
-					String[] criterios = {"Nombre","Identificacion","Correo","Direccion","Telefono","Genero"};
+					String[] criterios = {"ID Administrador","Nombre","Identificacion","Correo","Direccion","Telefono","Genero"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+					
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Registrar Producto")) {
+					consultas = new VBox(10);
+					nombre.setText("Registrar Producto");
+					descripcion.setText("Funcion realizada para registrar los productos vendidos en la tienda");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"ID Administrador","Marca","Tipo","Cantidad","Precio"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+					
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Crear Pedido")) {
+					consultas = new VBox(10);
+					nombre.setText("Crear Pedido");
+					descripcion.setText("Creación de pedidos");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"ID Administrador"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Ver")) {
+					consultas = new VBox(10);
+					nombre.setText("Lista de Productos");
+					descripcion.setText("Lista del estado de los productos en inventario");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					Label mostrar = new Label (Producto.listaProductos());
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, mostrar });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Editar")) {
+					consultas = new VBox(10);
+					nombre.setText("Editar Productos");
+					descripcion.setText("Permite modificar la cantidad disponible de un producto");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"ID Administrador","Codigo del Producto","Nueva Cantidad"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Realizar Devolucion")) {
+					consultas = new VBox(10);
+					nombre.setText("Realizar devolución");
+					descripcion.setText("Permite realizar la devolución de un producto vendido");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"ID Cliente","Codigo Factura","Codigo Detalle del producto","Cantidad a devolver"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+				}
+				else if((((MenuItem) cont).getText()).equals("Clientes Mayoritarios")) {
+					
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Mercancia Inactiva")) {
+					consultas = new VBox(10);
+					nombre.setText("Mercancia inactiva");
+					descripcion.setText("Permite la visualización de los productos que no se han vendido\n dentro de una rango de fechas");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"Fecha inicial","Fecha final"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+					
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Balances")) {
+					consultas = new VBox(10);
+					nombre.setText("Balances");
+					descripcion.setText("Permite la visualización del balance general de las ventas hechas en un rango de fechas");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"Fecha inicial","Fecha final"};
+					BorderPane panel = new BorderPane();
+					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					
+					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+					rt2.setStroke(Color.GRAY);
+					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					consultas.setAlignment(Pos.CENTER);
+					consultas.getChildren().addAll(sp,sp1,sp2);
+					setCenter(consultas);
+					setMargin(consultas, i);
+					
+				}
+				
+				else if((((MenuItem) cont).getText()).equals("Productos Mas Vendidos")) {
+					consultas = new VBox(10);
+					nombre.setText("Balances");
+					descripcion.setText("Permite la visualización de los productos mas vendidos dentro de un rango de fechas");
+					
+					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+					rt.setStroke(Color.GRAY);
+					StackPane sp = new StackPane(new Node[] { rt, nombre });
+					
+					Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+					rt1.setStroke(Color.GRAY);
+					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+					
+					String[] criterios = {"Fecha inicial","Fecha final"};
 					BorderPane panel = new BorderPane();
 					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
 					
@@ -152,6 +383,9 @@ public class VentanaPrincipal extends BorderPane {
 					
 				}
 			}
+			
+			
+			
 		}
 		
 	};
