@@ -28,7 +28,7 @@ public class FieldPane extends HBox {
 		
 		GridPane panel = new GridPane();
 		panel.setVgap(5.0D);
-	    panel.setHgap(100.0D);
+	    panel.setHgap(80.0D);
 	    panel.setPadding(new Insets(10,10,10,10));
 		VBox crit = new VBox(5);
 		VBox val = new VBox(5);
