@@ -1,5 +1,7 @@
 package GUI;
 
+import java.util.ArrayList;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -17,6 +19,7 @@ public class FieldPane extends HBox {
 	String valor;
 	String [] valores;
 	boolean [] habilitado;
+	ArrayList<TextField> campos = new ArrayList<>();
 	
 	public FieldPane(String tituloCriterios, String[] criterios, String valor,String[] valores, boolean[] habilitado) {
 		super();
@@ -51,6 +54,7 @@ public class FieldPane extends HBox {
 		    	valores1.setFont(new Font("Arial",13));
 		    	panel.add(valores1, 2, i+1);
 		    	panel.add(campo, 3, i+1);
+		    	campos.add(campo);
 		    	
 			}
 	    }else {
@@ -60,6 +64,10 @@ public class FieldPane extends HBox {
 	    
 	    getChildren().addAll(panel);
 	    
+	}
+
+	public ArrayList<TextField> getCampos() {
+		return campos;
 	}
 	
 	

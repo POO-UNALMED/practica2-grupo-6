@@ -1,5 +1,7 @@
 package GUI;
 
+import java.util.ArrayList;
+
 import gestorAplicacion.factura.Producto;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,6 +16,7 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -23,12 +26,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import uiMain.Main;
+import uiMain.Usuario;
 
 public class VentanaPrincipal extends BorderPane {
 	
 	VBox consultas;
 	Label nombre, descripcion;
 	Insets i = new Insets(10);
+	FieldPane pane;
 	
 	public VentanaPrincipal() {
 		super();
@@ -125,9 +130,18 @@ public class VentanaPrincipal extends BorderPane {
 		String[] criterios = {"Nombre","Identificacion","Correo","Direccion","Telefono","Genero","Salario","Profesion"};
 		BorderPane panel = new BorderPane();
 		panel.setAlignment(panel, Pos.CENTER);
-		panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+		pane = new FieldPane("criterio",criterios,"valor",null,null);
+		panel.setCenter(pane);
 		
-		Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
+		HBox botones = new HBox(80);
+		Button b1 = new Button("Aceptar");
+		Button b2 = new Button("Borrar");
+		botones.getChildren().addAll(b1,b2);
+		botones.setAlignment(Pos.CENTER);
+		b1.setOnAction(Aceptar);
+		panel.setBottom(botones);
+		
+		Rectangle rt2 = new Rectangle(500,320,Color.TRANSPARENT);
 		rt2.setStroke(Color.GRAY);
 		StackPane sp2 = new StackPane(new Node[] { rt2, panel });
 		
@@ -463,6 +477,27 @@ public class VentanaPrincipal extends BorderPane {
 				
 				
 			}
+			
+			
+			
+		}
+		
+	};
+	
+	EventHandler<ActionEvent> Aceptar = new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			ArrayList<TextField> campos =pane.getCampos();
+			int id = Integer.parseInt(campos.get(1).getText());
+			double salario = Double.parseDouble(campos.get(6).getText());
+			
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Resulato");
+			alert.setHeaderText(null);
+			alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
+			alert.showAndWait();
+			
 			
 			
 			
