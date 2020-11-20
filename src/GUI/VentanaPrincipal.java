@@ -34,6 +34,7 @@ public class VentanaPrincipal extends BorderPane {
 	Label nombre, descripcion;
 	Insets i = new Insets(10);
 	FieldPane pane;
+	ArrayList<TextField> campos;
 	
 	public VentanaPrincipal() {
 		super();
@@ -129,11 +130,12 @@ public class VentanaPrincipal extends BorderPane {
 		
 		String[] criterios = {"Nombre","Identificacion","Correo","Direccion","Telefono","Genero","Salario","Profesion"};
 		BorderPane panel = new BorderPane();
-		panel.setAlignment(panel, Pos.CENTER);
+		
 		pane = new FieldPane("criterio",criterios,"valor",null,null);
+		panel.setAlignment(pane, Pos.CENTER);
 		panel.setCenter(pane);
 		
-		HBox botones = new HBox(80);
+		HBox botones = new HBox(100);
 		Button b1 = new Button("Aceptar");
 		Button b2 = new Button("Borrar");
 		botones.getChildren().addAll(b1,b2);
@@ -141,7 +143,7 @@ public class VentanaPrincipal extends BorderPane {
 		b1.setOnAction(Aceptar);
 		panel.setBottom(botones);
 		
-		Rectangle rt2 = new Rectangle(500,320,Color.TRANSPARENT);
+		Rectangle rt2 = new Rectangle(500,300,Color.TRANSPARENT);
 		rt2.setStroke(Color.GRAY);
 		StackPane sp2 = new StackPane(new Node[] { rt2, panel });
 		
@@ -195,7 +197,7 @@ public class VentanaPrincipal extends BorderPane {
 					setMargin(consultas, i);
 					
 				}
-				else if((((MenuItem) cont).getText()).equals("Registrar Administrador")) {
+				else if((((MenuItem) cont).getText()).equals("Registrar Cliente")) {
 					consultas = new VBox(10);
 					nombre.setText("Registrar Cliente");
 					descripcion.setText("Funcion realizada para registrar los clientes que operan en la tienda");
@@ -488,7 +490,7 @@ public class VentanaPrincipal extends BorderPane {
 
 		@Override
 		public void handle(ActionEvent arg0) {
-			ArrayList<TextField> campos =pane.getCampos();
+			campos =pane.getCampos();
 			int id = Integer.parseInt(campos.get(1).getText());
 			double salario = Double.parseDouble(campos.get(6).getText());
 			
@@ -496,11 +498,7 @@ public class VentanaPrincipal extends BorderPane {
 			alert.setTitle("Resulato");
 			alert.setHeaderText(null);
 			alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-			alert.showAndWait();
-			
-			
-			
-			
+			alert.showAndWait();		
 		}
 		
 	};

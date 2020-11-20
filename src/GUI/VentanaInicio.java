@@ -54,7 +54,7 @@ public class VentanaInicio  extends BorderPane {
 			public void handle(ActionEvent event) {
 				VBox v = new VBox();
 				v.getChildren().addAll(new Node[] { new VentanaPrincipal() });
-				Scene scene2 = new Scene(v,700,500);
+				Scene scene2 = new Scene(v,700,550);
 				Main.window.setScene(scene2);
 			}
 			
