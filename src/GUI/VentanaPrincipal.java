@@ -853,6 +853,90 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
+				//main
+				String fechan = campos.get(0).getText();
+				String fechan2 = campos.get(1).getText();
+				
+				String [] fecha_n = fechan.split("/"); 
+		    	String [] fecha_n2 = fechan2.split("/");
+		    	
+		    	if(Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])==Integer.parseInt(fecha_n2[1])&&Integer.parseInt(fecha_n[0])<Integer.parseInt(fecha_n2[0])) {
+		    		
+		    		if(!Factura.rangoDeFacturas(fechan, fechan2).isEmpty()) {
+		    			ArrayList<Producto> Productos = Usuario.productosMasVendidos(fechan, fechan2);
+		    			if(!Productos.isEmpty()) {
+		    				System.out.println("Nombre   Codido de barras   Cantidad");
+		            		for (int i = 0; i < Productos.size(); i++) {
+								System.out.println(Productos.get(i).toString());
+								}
+		    			}else {
+		    				//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de balances");
+							alert.setHeaderText(null);
+							alert.setContentText("No se han vendido suficientes productos");
+
+							alert.showAndWait();
+		    				//System.out.println("No se han vendido suficientes productos");
+		    			}
+		       
+		        		}else {
+		        			//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de balances");
+							alert.setHeaderText(null);
+							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+
+							alert.showAndWait();
+		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
+		        		}
+		    		
+		    		
+		    		
+		    	}else if(Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])<Integer.parseInt(fecha_n2[1])) {
+		    		
+		    		if(!Factura.rangoDeFacturas(fechan, fechan2).isEmpty()) {
+		    			ArrayList<Producto> Productos = Usuario.productosMasVendidos(fechan, fechan2);
+		    			if(!Productos.isEmpty()) {
+		    				System.out.println("Nombre   Codido de barras   Cantidad");
+		            		for (int i = 0; i < Productos.size(); i++) {
+								System.out.println(Productos.get(i).toString());
+								}
+		    			}else {
+		    				//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de balances");
+							alert.setHeaderText(null);
+							alert.setContentText("No se han vendido suficientes productos");
+
+							alert.showAndWait();
+		    				//System.out.println("No se han vendido suficientes productos");
+		    			}
+		        		
+		        		}else {
+		        			//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de balances");
+							alert.setHeaderText(null);
+							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+
+							alert.showAndWait();
+		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
+		        		}
+		    		
+		    	}else {
+		    		//dialogo de informacion
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Informacion de balances");
+					alert.setHeaderText(null);
+					alert.setContentText("El rango de las fechas no es correcto");
+
+					alert.showAndWait();
+		    		//System.out.println("El rango de las fechas no es correcto");
+		    	}
+				
+				/*
+				campos =pane.getCampos();
 				int id = Integer.parseInt(campos.get(1).getText());
 				double salario = Double.parseDouble(campos.get(6).getText());
 				
@@ -860,7 +944,8 @@ public class VentanaPrincipal extends BorderPane {
 				alert.setTitle("Resultado");
 				alert.setHeaderText(null);
 				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();		
+				alert.showAndWait();	
+				*/	
 			}
 			
 		};
