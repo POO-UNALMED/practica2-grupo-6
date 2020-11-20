@@ -3,6 +3,8 @@ package GUI;
 import java.util.ArrayList;
 
 import gestorAplicacion.cliente.Administrador;
+import gestorAplicacion.cliente.Cliente;
+import gestorAplicacion.factura.Factura;
 import gestorAplicacion.factura.Producto;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -379,7 +381,9 @@ public class VentanaPrincipal extends BorderPane {
 					
 					String[] criterios = {"ID Cliente","Codigo Factura","Codigo Detalle del producto","Cantidad a devolver"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					//agregue este pane
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
@@ -564,7 +568,7 @@ public class VentanaPrincipal extends BorderPane {
 			double salario = Double.parseDouble(campos.get(6).getText());
 			
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Resulato");
+			alert.setTitle("Resultado");
 			alert.setHeaderText(null);
 			alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
 			alert.showAndWait();		
@@ -583,7 +587,7 @@ public class VentanaPrincipal extends BorderPane {
 				Administrador admin = Administrador.consultarAdmin(id);
 				if(admin!=null) {
 					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Resulato");
+					alert.setTitle("Resultado");
 					alert.setHeaderText(null);
 					alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
 					alert.showAndWait();
@@ -611,7 +615,7 @@ public class VentanaPrincipal extends BorderPane {
 			Administrador admin = Administrador.consultarAdmin(id);
 			if(admin!=null) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resulato");
+				alert.setTitle("Resultado");
 				alert.setHeaderText(null);
 				alert.setContentText(Usuario.registrarProducto(admin,campos.get(1).getText(),campos.get(2).getText(), campos.get(3).getText(),cantidad,precio ));
 				alert.showAndWait();
@@ -632,14 +636,41 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
-				int id = Integer.parseInt(campos.get(1).getText());
-				double salario = Double.parseDouble(campos.get(6).getText());
+				int id = Integer.parseInt(campos.get(0).getText());
+				int codF = Integer.parseInt(campos.get(1).getText());
+				int codDet = Integer.parseInt(campos.get(2).getText());
+				int cantidad = Integer.parseInt(campos.get(3).getText());
+				Cliente devolucion = Cliente.consultarCliente(id);
+				if(devolucion!=null) {
+					Factura consulta = Factura.consultarFactura(codF);
+		    		
+		    		if(consulta!=null) {
+		    			if(consulta.getPedido().consultarProducto(codDet)!=null) {
+		    				Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Resultado");
+							alert.setHeaderText(null);
+							alert.setContentText(Usuario.devolucion(codF, codDet, cantidad));
+							alert.showAndWait();
+		    				
+		    			}else {
+		    				System.out.println("producto no encontrado");
+						}
+		    			
+		    			
+		    			
+		    		}
+		    		else {
+		    			System.out.println("No se encontro factura");
+					}
+					
+					
+						
+						
+				}else {
+	    			System.out.println("No se encontro cliente");
+				}
 				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resulato");
-				alert.setHeaderText(null);
-				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();		
+					
 			}
 			
 		};
@@ -654,7 +685,7 @@ public class VentanaPrincipal extends BorderPane {
 				double salario = Double.parseDouble(campos.get(6).getText());
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resulato");
+				alert.setTitle("Resultado");
 				alert.setHeaderText(null);
 				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
 				alert.showAndWait();		
@@ -671,7 +702,7 @@ public class VentanaPrincipal extends BorderPane {
 				double salario = Double.parseDouble(campos.get(6).getText());
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resulato");
+				alert.setTitle("Resultado");
 				alert.setHeaderText(null);
 				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
 				alert.showAndWait();		
@@ -688,7 +719,7 @@ public class VentanaPrincipal extends BorderPane {
 				double salario = Double.parseDouble(campos.get(6).getText());
 				
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resulato");
+				alert.setTitle("Resultado");
 				alert.setHeaderText(null);
 				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
 				alert.showAndWait();		
