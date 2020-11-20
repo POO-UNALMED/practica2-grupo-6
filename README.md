@@ -5,4 +5,4 @@
 #### Deyner Elías López pineda
 #### Daniel Torres Aguirre
 #### Deninson Alexander Chamorro Rueda
-![x](https://icdn6.digitaltrends.com/image/digitaltrends_es/mejores-fondos-de-pantalla-2-416x416.jpg)
+![x](https://educa3000.milaulas.com/pluginfile.php/22/coursecat/description/banner.jpg)
