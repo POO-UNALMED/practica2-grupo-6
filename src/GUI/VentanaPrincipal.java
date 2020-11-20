@@ -423,7 +423,9 @@ public class VentanaPrincipal extends BorderPane {
 					
 					String[] criterios = {"Fecha inicial","Fecha final"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					//agregue este pane
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
@@ -460,7 +462,9 @@ public class VentanaPrincipal extends BorderPane {
 					
 					String[] criterios = {"Fecha inicial","Fecha final"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					//agregue este pane
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
@@ -497,7 +501,9 @@ public class VentanaPrincipal extends BorderPane {
 					
 					String[] criterios = {"Fecha inicial","Fecha final"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					//agregue este pane
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
@@ -681,6 +687,95 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
+				//main
+				String fecha1 = campos.get(0).getText();
+				String fecha2 = campos.get(1).getText();
+				
+				String [] fecha_1 = fecha1.split("/"); 
+		    	String [] fecha_2 = fecha2.split("/");
+		    	
+		    	if(Integer.parseInt(fecha_1[2])==Integer.parseInt(fecha_2[2])&&Integer.parseInt(fecha_1[1])==Integer.parseInt(fecha_2[1])&&Integer.parseInt(fecha_1[0])<Integer.parseInt(fecha_2[0])) {
+		    		
+		    		if(!Factura.rangoDeFacturas(fecha1, fecha2).isEmpty()) {
+		    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
+		    			
+		    			if(!Productos.isEmpty()) {
+		    				System.out.println("Nombre   Codido de barras   Cantidad en inventario");
+		            		for (int i = 0; i < Productos.size(); i++) {
+								System.out.println(Productos.get(i).toString());
+		    			}
+							}else {
+								//dialogo de informacion
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Informacion de busqueda");
+								alert.setHeaderText(null);
+								alert.setContentText("No hay suficientes productos vendidos");
+
+								alert.showAndWait();
+								
+								//System.out.println("No hay suficientes productos vendidos");
+								
+								
+								
+								
+								
+								
+							}
+		        		}else {
+		        			//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de busqueda");
+							alert.setHeaderText(null);
+							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+
+							alert.showAndWait();
+		        			
+		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
+		        		}
+		    		
+		    		
+		    		
+		    	}else if(Integer.parseInt(fecha_1[2])==Integer.parseInt(fecha_2[2])&&Integer.parseInt(fecha_1[1])<Integer.parseInt(fecha_2[1])) {
+		    		
+		    		if(!Factura.rangoDeFacturas(fecha1, fecha2).isEmpty()) {
+		    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
+		        		System.out.println("Nombre   Codido de barras   Cantidad");
+		        		for (int i = 0; i < Productos.size(); i++) {
+							System.out.println(Productos.get(i).toString());
+							}
+		        		}else {
+		        			//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de busqueda");
+							alert.setHeaderText(null);
+							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+
+							alert.showAndWait();
+		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
+		        		}
+		    		
+		    	}else {
+		    		//dialogo de informacion
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Informacion de busqueda");
+					alert.setHeaderText(null);
+					alert.setContentText("El rango de las fechas no es correcto");
+
+					alert.showAndWait();
+		    		//System.out.println("El rango de las fechas no es correcto");
+		    	}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				/*
+				campos =pane.getCampos();
 				int id = Integer.parseInt(campos.get(1).getText());
 				double salario = Double.parseDouble(campos.get(6).getText());
 				
@@ -688,7 +783,10 @@ public class VentanaPrincipal extends BorderPane {
 				alert.setTitle("Resultado");
 				alert.setHeaderText(null);
 				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();		
+				alert.showAndWait();
+				*/
+				
+				
 			}
 			
 		};
