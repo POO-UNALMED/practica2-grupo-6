@@ -1038,8 +1038,28 @@ public class VentanaPrincipal extends BorderPane {
 						pedido1.setCliente(cliente);
 						pedido1.setAdmin(Admin);
 						pedido1.setPedido(pedido);
+					}else {
+						//dialogo de informacion
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Informacion de pedido");
+						alert.setHeaderText(null);
+						alert.setContentText("Cliente no registrado");
+
+						alert.showAndWait();
 					}
+					
+					
+					
+				}else {
+					//dialogo de informacion
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Informacion de pedido");
+					alert.setHeaderText(null);
+					alert.setContentText("Administrador no registrado");
+
+					alert.showAndWait();
 				}
+				
 				
 			}
 			
