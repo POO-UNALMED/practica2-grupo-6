@@ -185,7 +185,8 @@ public class VentanaPrincipal extends BorderPane {
 					String[] criterios = {"Nombre","Identificacion","Correo","Direccion","Telefono","Genero","Salario","Profesion"};
 					BorderPane panel = new BorderPane();
 					panel.setAlignment(panel, Pos.CENTER);
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					pane=new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
@@ -221,7 +222,8 @@ public class VentanaPrincipal extends BorderPane {
 					
 					String[] criterios = {"ID Administrador","Nombre","Identificacion","Correo","Direccion","Telefono","Genero"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
@@ -573,8 +575,8 @@ public class VentanaPrincipal extends BorderPane {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				campos =pane.getCampos();
-				int id = Integer.parseInt(campos.get(1).getText());
+				ArrayList<TextField> campos= pane.getCampos();
+				int id = Integer.parseInt(campos.get(0).getText());
 				int idc = Integer.parseInt(campos.get(2).getText());
 				Administrador admin = Administrador.consultarAdmin(id);
 				if(admin!=null) {
