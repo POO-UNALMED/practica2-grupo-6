@@ -5,4 +5,4 @@
 #### Deyner Elías López pineda
 #### Daniel Torres Aguirre
 #### Deninson Alexander Chamorro Rueda
-![x](https://www.google.com/url?sa=i&url=http%3A%2F%2Fcec.tecnologicoedupraxis.com%2Fcourses%2Fdiseno-grafico-publicitario-2%2F&psig=AOvVaw24KHShMTXbRZJeK2iY8LZS&ust=1605938189561000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjz9I-4kO0CFQAAAAAdAAAAABAn)
+![x](https://cec.tecnologicoedupraxis.com/wp-content/uploads/2017/02/Dise%C3%B1o-Gr%C3%A1fico-Publicitario-Tecnol%C3%B3gico-Edupraxis-2-1.jpg)
