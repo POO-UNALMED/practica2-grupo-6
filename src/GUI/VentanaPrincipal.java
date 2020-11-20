@@ -714,12 +714,7 @@ public class VentanaPrincipal extends BorderPane {
 								alert.showAndWait();
 								
 								//System.out.println("No hay suficientes productos vendidos");
-								
-								
-								
-								
-								
-								
+														
 							}
 		        		}else {
 		        			//dialogo de informacion
@@ -731,9 +726,7 @@ public class VentanaPrincipal extends BorderPane {
 							alert.showAndWait();
 		        			
 		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
-		        		}
-		    		
-		    		
+		        		}	    		
 		    		
 		    	}else if(Integer.parseInt(fecha_1[2])==Integer.parseInt(fecha_2[2])&&Integer.parseInt(fecha_1[1])<Integer.parseInt(fecha_2[1])) {
 		    		
@@ -766,14 +759,6 @@ public class VentanaPrincipal extends BorderPane {
 		    	}
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
 				/*
 				campos =pane.getCampos();
 				int id = Integer.parseInt(campos.get(1).getText());
@@ -786,7 +771,6 @@ public class VentanaPrincipal extends BorderPane {
 				alert.showAndWait();
 				*/
 				
-				
 			}
 			
 		};
@@ -796,6 +780,61 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
+				//main
+				String f1 = campos.get(0).getText();
+				String f2 = campos.get(1).getText();
+				
+				String [] fecha_f1 = f1.split("/"); 
+		    	String [] fecha_f2 = f2.split("/");
+		    	
+		    	if(Integer.parseInt(fecha_f1[2])==Integer.parseInt(fecha_f2[2])&&Integer.parseInt(fecha_f1[1])==Integer.parseInt(fecha_f2[1])&&Integer.parseInt(fecha_f1[0])<Integer.parseInt(fecha_f2[0])) {
+		    		
+		    		if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
+		    			System.out.println(Usuario.Balance(f1, f2));
+		    			
+		        		}else {
+		        			//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de balances");
+							alert.setHeaderText(null);
+							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+
+							alert.showAndWait();
+		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
+		        		}
+		    		
+		    		
+		    		
+		    		
+		    	}else if(Integer.parseInt(fecha_f1[2])==Integer.parseInt(fecha_f2[2])&&Integer.parseInt(fecha_f1[1])<Integer.parseInt(fecha_f2[1])) {
+		    		
+		    		if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
+		    			System.out.println(Usuario.Balance(f1, f2));
+		        		}else {
+		        			//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de balances");
+							alert.setHeaderText(null);
+							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+
+							alert.showAndWait();
+		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
+		        		}
+		    		
+		    	}else {
+		    		//dialogo de informacion
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Informacion de balances");
+					alert.setHeaderText(null);
+					alert.setContentText("El rango de las fechas no es correcto");
+
+					alert.showAndWait();
+		    		//System.out.println("El rango de las fechas no es correcto");
+		    	} 
+				
+				
+				/*
+				campos =pane.getCampos();
 				int id = Integer.parseInt(campos.get(1).getText());
 				double salario = Double.parseDouble(campos.get(6).getText());
 				
@@ -803,7 +842,8 @@ public class VentanaPrincipal extends BorderPane {
 				alert.setTitle("Resultado");
 				alert.setHeaderText(null);
 				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();		
+				alert.showAndWait();	
+				*/	
 			}
 			
 		};
