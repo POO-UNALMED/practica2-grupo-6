@@ -257,9 +257,11 @@ public class VentanaPrincipal extends BorderPane {
 					rt1.setStroke(Color.GRAY);
 					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
 					
-					String[] criterios = {"ID Administrador","Marca","Tipo","Cantidad","Precio"};
+					String[] criterios = {"ID Administrador","Nombre","Marca","Tipo","Cantidad","Precio"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					//agregue este pane
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
@@ -602,16 +604,21 @@ public class VentanaPrincipal extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			campos =pane.getCampos();
-			int id = Integer.parseInt(campos.get(1).getText());
-			int idc = Integer.parseInt(campos.get(2).getText());
+			int id = Integer.parseInt(campos.get(0).getText());
+			int cantidad = Integer.parseInt(campos.get(4).getText());
+			double precio = Double.parseDouble(campos.get(5).getText());
+			
 			Administrador admin = Administrador.consultarAdmin(id);
 			if(admin!=null) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Resulato");
 				alert.setHeaderText(null);
-				alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
+				alert.setContentText(Usuario.registrarProducto(admin,campos.get(1).getText(),campos.get(2).getText(), campos.get(3).getText(),cantidad,precio ));
 				alert.showAndWait();
 				
+			}
+			else {
+				System.out.println("Identificacion incorrecta");
 			}
 			
 					
