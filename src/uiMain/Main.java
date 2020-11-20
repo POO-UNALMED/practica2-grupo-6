@@ -135,7 +135,7 @@ public class Main extends Application{
 			
 		}while(numero!=0);
 		
-		Persistencia.guardarArchivos();
+		
       
 
 	}
@@ -153,6 +153,7 @@ public class Main extends Application{
 	}
 	
 	public void stop() {
+		Persistencia.guardarArchivos();
 		System.out.println("la app se cerro");
 		System.out.println("0");
 		

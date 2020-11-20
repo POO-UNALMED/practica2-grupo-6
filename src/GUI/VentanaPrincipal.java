@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import gestorAplicacion.cliente.Administrador;
 import gestorAplicacion.cliente.Cliente;
 import gestorAplicacion.factura.Factura;
+import gestorAplicacion.factura.Pedido;
 import gestorAplicacion.factura.Producto;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -144,6 +145,7 @@ public class VentanaPrincipal extends BorderPane {
 		botones.getChildren().addAll(b1,b2);
 		botones.setAlignment(Pos.CENTER);
 		b1.setOnAction(Aceptar);
+		b2.setOnAction(borrar);
 		panel.setBottom(botones);
 		
 		Rectangle rt2 = new Rectangle(500,300,Color.TRANSPARENT);
@@ -200,6 +202,7 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(Aceptar);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
@@ -237,6 +240,7 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(Aceptar2);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
@@ -277,6 +281,7 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(Aceptar3);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					
@@ -300,13 +305,24 @@ public class VentanaPrincipal extends BorderPane {
 					rt1.setStroke(Color.GRAY);
 					StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
 					
-					String[] criterios = {"ID Administrador"};
+					String[] criterios = {"ID Administrador","ID Cliente"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Siguiente");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					//b1.setOnAction(Aceptar3);
+					b1.setOnAction(Siguiente);
+					b2.setOnAction(borrar);
+					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
@@ -370,6 +386,7 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(editar);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
@@ -409,6 +426,7 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(Aceptar6);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
@@ -418,6 +436,26 @@ public class VentanaPrincipal extends BorderPane {
 				}
 				else if((((MenuItem) cont).getText()).equals("Clientes Mayoritarios")) {
 					
+					String lista = "";
+					if(Cliente.getClientes().size()>=3) {
+						ArrayList <Cliente> Mayores = Usuario.clientesMayoritarios();
+						for(int i = 0;i < Mayores.size();i++) {
+							
+							lista=lista+"Cliente "+ (i+1)+": " + Mayores.get(i)+" Compras= "+ Mayores.get(i).totalCompras()+"\n";
+							
+					
+						}
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Resultado");
+						alert.setHeaderText(null);
+						alert.setContentText(lista);
+						alert.getDialogPane().setPrefSize(500, 150);
+						alert.showAndWait();
+						
+						
+					}else {
+						
+					}
 				}
 				
 				else if((((MenuItem) cont).getText()).equals("Mercancia Inactiva")) {
@@ -450,6 +488,7 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(Aceptar7);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
@@ -489,6 +528,7 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(Aceptar8);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
@@ -528,12 +568,14 @@ public class VentanaPrincipal extends BorderPane {
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
 					b1.setOnAction(Aceptar9);
+					b2.setOnAction(borrar);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
 					setCenter(consultas);
-					setMargin(consultas, i);
+
+
 					
 				}
 				
@@ -960,6 +1002,45 @@ public class VentanaPrincipal extends BorderPane {
 		    		//System.out.println("El rango de las fechas no es correcto");
 		    	}
 								
+			}
+			
+		};
+		
+		EventHandler<ActionEvent> borrar = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				campos =pane.getCampos();
+				for (int i = 0; i < campos.size(); i++) {
+					campos.get(i).setText("");
+				}
+				
+			}
+			
+		};
+		
+		EventHandler<ActionEvent> Siguiente = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				campos = pane.getCampos();
+				int idAdmin = Integer.parseInt(campos.get(0).getText());
+				int idClient = Integer.parseInt(campos.get(1).getText());
+				Administrador Admin = Administrador.consultarAdmin(idAdmin);
+				Cliente cliente = Cliente.consultarCliente(idClient);
+				if(Admin!=null) {
+					if (cliente!=null) {
+						Pedido pedido = Usuario.crearPedido(Admin);
+						VentanaPedido pedido1 = new VentanaPedido();
+						setCenter(pedido1);
+						setMargin(pedido1, i);
+						pedido1.setCliente(cliente);
+						pedido1.setAdmin(Admin);
+						pedido1.setPedido(pedido);
+					}
+				}
+				
 			}
 			
 		};
