@@ -134,7 +134,7 @@ public class VentanaPrincipal extends BorderPane {
 		pane = new FieldPane("criterio",criterios,"valor",null,null);
 		panel.setAlignment(pane, Pos.CENTER);
 		panel.setCenter(pane);
-		
+		//botones
 		HBox botones = new HBox(100);
 		Button b1 = new Button("Aceptar");
 		Button b2 = new Button("Borrar");
@@ -217,6 +217,14 @@ public class VentanaPrincipal extends BorderPane {
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(Aceptar);
+					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
