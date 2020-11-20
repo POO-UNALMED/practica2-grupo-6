@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.ArrayList;
 
+import gestorAplicacion.cliente.Administrador;
 import gestorAplicacion.factura.Producto;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -190,6 +191,14 @@ public class VentanaPrincipal extends BorderPane {
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
 					
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(Aceptar);
+					panel.setBottom(botones);
+					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
 					
@@ -223,7 +232,7 @@ public class VentanaPrincipal extends BorderPane {
 					Button b2 = new Button("Borrar");
 					botones.getChildren().addAll(b1,b2);
 					botones.setAlignment(Pos.CENTER);
-					b1.setOnAction(Aceptar);
+					b1.setOnAction(Aceptar2);
 					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
@@ -253,6 +262,17 @@ public class VentanaPrincipal extends BorderPane {
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					
+					//botones
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(Aceptar3);
+					panel.setBottom(botones);
+					
 					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
@@ -361,6 +381,16 @@ public class VentanaPrincipal extends BorderPane {
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
 					
+					
+					//botones
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(Aceptar6);
+					panel.setBottom(botones);
+					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
 					setCenter(consultas);
@@ -391,6 +421,15 @@ public class VentanaPrincipal extends BorderPane {
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
 					
+					//botones
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(Aceptar7);
+					panel.setBottom(botones);
+					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
 					setCenter(consultas);
@@ -419,6 +458,15 @@ public class VentanaPrincipal extends BorderPane {
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
 					
+					//botones
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(Aceptar8);
+					panel.setBottom(botones);
+					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
 					setCenter(consultas);
@@ -446,6 +494,15 @@ public class VentanaPrincipal extends BorderPane {
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					//botones
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(Aceptar9);
+					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
@@ -510,5 +567,124 @@ public class VentanaPrincipal extends BorderPane {
 		}
 		
 	};
+	
+	///registrar cliente
+		EventHandler<ActionEvent> Aceptar2 = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				campos =pane.getCampos();
+				int id = Integer.parseInt(campos.get(1).getText());
+				int idc = Integer.parseInt(campos.get(2).getText());
+				Administrador admin = Administrador.consultarAdmin(id);
+				if(admin!=null) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Resulato");
+					alert.setHeaderText(null);
+					alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
+					alert.showAndWait();
+					
+				}
+				else {
+					System.out.println("Identificacion incorrecta");
+				}
+						
+			}
+			
+		};
+	
+	
+	///registrar producto
+	EventHandler<ActionEvent> Aceptar3 = new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			campos =pane.getCampos();
+			int id = Integer.parseInt(campos.get(1).getText());
+			int idc = Integer.parseInt(campos.get(2).getText());
+			Administrador admin = Administrador.consultarAdmin(id);
+			if(admin!=null) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Resulato");
+				alert.setHeaderText(null);
+				alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
+				alert.showAndWait();
+				
+			}
+			
+					
+		}
+		
+	};
+	
+	///realizar devolucion
+		EventHandler<ActionEvent> Aceptar6 = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				campos =pane.getCampos();
+				int id = Integer.parseInt(campos.get(1).getText());
+				double salario = Double.parseDouble(campos.get(6).getText());
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Resulato");
+				alert.setHeaderText(null);
+				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
+				alert.showAndWait();		
+			}
+			
+		};
+	
+		///mercancia inactiva
+		EventHandler<ActionEvent> Aceptar7 = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				campos =pane.getCampos();
+				int id = Integer.parseInt(campos.get(1).getText());
+				double salario = Double.parseDouble(campos.get(6).getText());
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Resulato");
+				alert.setHeaderText(null);
+				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
+				alert.showAndWait();		
+			}
+			
+		};
+		///Balances
+		EventHandler<ActionEvent> Aceptar8= new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				campos =pane.getCampos();
+				int id = Integer.parseInt(campos.get(1).getText());
+				double salario = Double.parseDouble(campos.get(6).getText());
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Resulato");
+				alert.setHeaderText(null);
+				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
+				alert.showAndWait();		
+			}
+			
+		};
+		///Productos mas vendidos
+		EventHandler<ActionEvent> Aceptar9 = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				campos =pane.getCampos();
+				int id = Integer.parseInt(campos.get(1).getText());
+				double salario = Double.parseDouble(campos.get(6).getText());
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Resulato");
+				alert.setHeaderText(null);
+				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
+				alert.showAndWait();		
+			}
+			
+		};
 
 }
