@@ -354,11 +354,23 @@ public class VentanaPrincipal extends BorderPane {
 					
 					String[] criterios = {"ID Administrador","Codigo del Producto","Nueva Cantidad"};
 					BorderPane panel = new BorderPane();
-					panel.setCenter(new FieldPane("criterio",criterios,"valor",null,null));
+					//agregue este pane
+					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
 					rt2.setStroke(Color.GRAY);
 					StackPane sp2 = new StackPane(new Node[] { rt2, panel });
+					
+					
+					//botones
+					HBox botones = new HBox(100);
+					Button b1 = new Button("Aceptar");
+					Button b2 = new Button("Borrar");
+					botones.getChildren().addAll(b1,b2);
+					botones.setAlignment(Pos.CENTER);
+					b1.setOnAction(editar);
+					panel.setBottom(botones);
 					
 					consultas.setAlignment(Pos.CENTER);
 					consultas.getChildren().addAll(sp,sp1,sp2);
@@ -636,6 +648,44 @@ public class VentanaPrincipal extends BorderPane {
 		
 	};
 	
+	
+	
+	///Editar inventario
+		EventHandler<ActionEvent> editar = new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				campos =pane.getCampos();
+				int id = Integer.parseInt(campos.get(0).getText());				
+				Long codPro1 = Long.parseLong(campos.get(1).getText());
+				int cantidad = Integer.parseInt(campos.get(2).getText());
+				Administrador admin = Administrador.consultarAdmin(id);
+				if(admin!=null) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Resultado");
+					alert.setHeaderText(null);
+					alert.setContentText(Usuario.agregarInventario(admin, codPro1, cantidad));
+					alert.showAndWait();
+					
+				}
+				else {
+					//dialogo de informacion
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Editar inventario dice..");
+					alert.setHeaderText(null);
+					alert.setContentText("Identificacion de administrador incorrecta");
+
+					alert.showAndWait();
+					//System.out.println("Identificacion de administrador incorrecta");
+				}
+						
+			}
+			
+		};
+	
+	
+	
+	
 	///realizar devolucion
 		EventHandler<ActionEvent> Aceptar6 = new EventHandler<ActionEvent>() {
 
@@ -758,19 +808,6 @@ public class VentanaPrincipal extends BorderPane {
 		    		//System.out.println("El rango de las fechas no es correcto");
 		    	}
 				
-				
-				/*
-				campos =pane.getCampos();
-				int id = Integer.parseInt(campos.get(1).getText());
-				double salario = Double.parseDouble(campos.get(6).getText());
-				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resultado");
-				alert.setHeaderText(null);
-				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();
-				*/
-				
 			}
 			
 		};
@@ -831,19 +868,7 @@ public class VentanaPrincipal extends BorderPane {
 					alert.showAndWait();
 		    		//System.out.println("El rango de las fechas no es correcto");
 		    	} 
-				
-				
-				/*
-				campos =pane.getCampos();
-				int id = Integer.parseInt(campos.get(1).getText());
-				double salario = Double.parseDouble(campos.get(6).getText());
-				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resultado");
-				alert.setHeaderText(null);
-				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();	
-				*/	
+					
 			}
 			
 		};
@@ -934,18 +959,7 @@ public class VentanaPrincipal extends BorderPane {
 					alert.showAndWait();
 		    		//System.out.println("El rango de las fechas no es correcto");
 		    	}
-				
-				/*
-				campos =pane.getCampos();
-				int id = Integer.parseInt(campos.get(1).getText());
-				double salario = Double.parseDouble(campos.get(6).getText());
-				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resultado");
-				alert.setHeaderText(null);
-				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();	
-				*/	
+								
 			}
 			
 		};
