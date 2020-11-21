@@ -35,7 +35,7 @@ import uiMain.Usuario;
 public class VentanaPrincipal extends BorderPane {
 	
 	VBox consultas;
-	Label nombre, descripcion;
+	Label nombre, descripcion = new Label();
 	Insets i = new Insets(10);
 	FieldPane pane;
 	ArrayList<TextField> campos;
@@ -117,7 +117,7 @@ public class VentanaPrincipal extends BorderPane {
 		nombre = new Label("INSTRUCCIONES");
 		nombre.setFont(new Font("Arial",16));
 		nombre.setAlignment(Pos.CENTER);
-		
+		descripcion.setFont(new Font("Arial",16));
 		Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
 		rt.setStroke(Color.GRAY);
 		StackPane sp = new StackPane(new Node[] { rt, nombre });
