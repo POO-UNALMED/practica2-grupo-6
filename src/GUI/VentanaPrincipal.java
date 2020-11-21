@@ -114,7 +114,7 @@ public class VentanaPrincipal extends BorderPane {
 		
 		//Formularios
 		consultas = new VBox(10);
-		nombre = new Label("Registrar Administrador");
+		nombre = new Label("INSTRUCCIONES");
 		nombre.setFont(new Font("Arial",16));
 		nombre.setAlignment(Pos.CENTER);
 		
@@ -122,42 +122,35 @@ public class VentanaPrincipal extends BorderPane {
 		rt.setStroke(Color.GRAY);
 		StackPane sp = new StackPane(new Node[] { rt, nombre });
 		
-		descripcion = new Label("Funcion realizada para registrar los administradores que operan en la tienda");
-		descripcion.setFont(new Font("Arial",16));
-		descripcion.setAlignment(Pos.CENTER);
+		Label instrucciones = new Label();
 		
-		Rectangle rt1 = new Rectangle(600,50,Color.TRANSPARENT);
+		instrucciones.setText("  La aplicación se desarolló con el fin de ayudar con los procesos de ventas.\r\n"
+				+ "  Dentro de la aplicacion se pueden realizar ventas desde un usario administrador\r\n"
+				+ "  el cual tiene el control de acceso para las ventas, puede realizar el registro de usuarios\r\n"
+				+ "  creacion de pedidos, registro de productos, tambien se tendra acceso a las funcionalidades\r\n"
+				+ "  de inventario, en la cual se podra ver y modificar las cantidades existentes de cada producto.\r\n"
+				+ "  Realizacion de devoluciones a pedidos realizados, un top 3 con los clientes que mas compras \r\n"
+				+ "  han realizado, ver la mercancia inactiva, los balances y productos mas vendidos dentro de un\r\n"
+				+ "  rango de fechas que el usuario escoja \r\n"
+				+ "  La aplicacion cuenta con un menu superior, Archivo, Procesos y consultas, Ayuda.\r\n" 
+				+ "  En archivo podemos encontrar las opciones usuario y salir , en usuario encontramos\r\n"
+				+ "  la version de la aplicacion.\r\n" 
+				+ "  En procesos y consultas, encontramos las funcinalidades de la aplicacion algunas\r\n"
+				+ "  como crear pedidos, y registrar clientes\r\n" 
+				+ "  a exepcion de  la funcionalidad Clientes mayoritas, todas requieren datos los cuales\r\n"
+				+ "  deben ser ingresador por el usuario\r\n" 
+				+ "  y en la pestaña ayuda podemos encontrar la informacion acerca de los desarrolladores");
+		instrucciones.setFont(new Font("Arial",15));
+		
+		Rectangle rt1 = new Rectangle(650,350,Color.TRANSPARENT);
 		rt1.setStroke(Color.GRAY);
-		StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
-		
-		//campos
-		
-		String[] criterios = {"Nombre","Identificacion","Correo","Direccion","Telefono","Genero","Salario","Profesion"};
-		BorderPane panel = new BorderPane();
-		
-		pane = new FieldPane("criterio",criterios,"valor",null,null);
-		panel.setAlignment(pane, Pos.CENTER);
-		panel.setCenter(pane);
-		//botones
-		HBox botones = new HBox(100);
-		Button b1 = new Button("Aceptar");
-		Button b2 = new Button("Borrar");
-		botones.getChildren().addAll(b1,b2);
-		botones.setAlignment(Pos.CENTER);
-		b1.setOnAction(Aceptar);
-		b2.setOnAction(borrar);
-		panel.setBottom(botones);
-		
-		Rectangle rt2 = new Rectangle(500,300,Color.TRANSPARENT);
-		rt2.setStroke(Color.GRAY);
-		StackPane sp2 = new StackPane(new Node[] { rt2, panel });
-		
+		StackPane sp1 = new StackPane(new Node[] { rt1, instrucciones });
+		consultas = new VBox(10);
 		consultas.setAlignment(Pos.CENTER);
-		consultas.getChildren().addAll(sp,sp1,sp2);
+		consultas.getChildren().addAll(sp,sp1);
 		
 		setCenter(consultas);
 		setMargin(consultas, i);
-		
 	}
 	
 	EventHandler<ActionEvent> menu = new EventHandler<ActionEvent>() {
