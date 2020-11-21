@@ -461,7 +461,7 @@ public class VentanaPrincipal extends BorderPane {
 				else if((((MenuItem) cont).getText()).equals("Mercancia Inactiva")) {
 					consultas = new VBox(10);
 					nombre.setText("Mercancia inactiva");
-					descripcion.setText("Permite la visualización de los productos que no se han vendido\n dentro de una rango de fechas");
+					descripcion.setText("Permite la visualización de los productos que no se han vendido\n dentro de una rango de fechas(formato de fecha 00/00/0000)");
 					
 					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
 					rt.setStroke(Color.GRAY);
@@ -501,7 +501,7 @@ public class VentanaPrincipal extends BorderPane {
 				else if((((MenuItem) cont).getText()).equals("Balances")) {
 					consultas = new VBox(10);
 					nombre.setText("Balances");
-					descripcion.setText("Permite la visualización del balance general de las ventas hechas en un rango de fechas");
+					descripcion.setText("Permite la visualización del balance general de las ventas hechas en \nun rango de fechas");
 					
 					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
 					rt.setStroke(Color.GRAY);
@@ -541,7 +541,7 @@ public class VentanaPrincipal extends BorderPane {
 				else if((((MenuItem) cont).getText()).equals("Productos Mas Vendidos")) {
 					consultas = new VBox(10);
 					nombre.setText("Balances");
-					descripcion.setText("Permite la visualización de los productos mas vendidos dentro de un rango de fechas");
+					descripcion.setText("Permite la visualización de los productos mas vendidos dentro de \nun rango de fechas");
 					
 					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
 					rt.setStroke(Color.GRAY);
