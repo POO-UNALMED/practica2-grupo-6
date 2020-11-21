@@ -59,6 +59,7 @@ public class VentanaPedido extends VBox{
 		botones.getChildren().addAll(b1,b2,b3);
 		botones.setAlignment(Pos.CENTER);
 		b1.setOnAction(Agregar);
+		b2.setOnAction(Retirar);
 		b3.setOnAction(Confirmar);
 		panel.setBottom(botones);
 		
@@ -134,6 +135,40 @@ public class VentanaPedido extends VBox{
 		}
 		
 	};
+	
+	EventHandler<ActionEvent> Retirar = new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent arg0) {
+			
+			
+			if(!pedido.getDetalleProductos().isEmpty()) {
+				TextInputDialog dialog = new TextInputDialog();
+				dialog.setTitle("Retirar Producto del Pedido");
+				dialog.setHeaderText(pedido.listaProductos());
+				dialog.setContentText("Ingrese Codigo detalle del Producto: ");
+				
+				// Traditional way to get the response value.
+				Optional<String> result = dialog.showAndWait();
+				if(result.isPresent()) {
+					
+					pedido.quitar_producto(Integer.parseInt(result.get()));
+				}
+									}
+			else {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Pedido");
+				alert.setHeaderText(null);
+				alert.setContentText("No se ha registrado ningun producto");
+
+				alert.showAndWait();
+			}	
+			
+		}
+		
+	};
+	
+	
 	
 	
 	
