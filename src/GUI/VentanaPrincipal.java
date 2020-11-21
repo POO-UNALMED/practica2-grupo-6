@@ -131,7 +131,7 @@ public class VentanaPrincipal extends BorderPane {
 				+ "  creacion de pedidos, registro de productos, tambien se tendra acceso a las funcionalidades\r\n"
 				+ "  de inventario, en la cual se podra ver y modificar las cantidades existentes de cada producto.\r\n"
 				+ "\r\n "
-				+ "  Realizacion de devoluciones a pedidos realizados, un top 3 con los clientes que mas compras \r\n"
+				+ " Realizacion de devoluciones a pedidos realizados, un top 3 con los clientes que mas compras \r\n"
 				+ "  han realizado, ver la mercancia inactiva, los balances y productos mas vendidos dentro de un\r\n"
 				+ "  rango de fechas que el usuario escoja. \r\n"
 				+ " \r\n"
