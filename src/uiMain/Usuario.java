@@ -5,6 +5,7 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Excepciones.ExcepcionFecha;
 import gestorAplicacion.cliente.*;
 import gestorAplicacion.factura.*;
 import javafx.scene.control.Alert;
@@ -14,7 +15,7 @@ public class Usuario {
 	
 	
 	
-	static public boolean confirmarFechas(String fechan, String fechan2) {
+	static public boolean confirmarFechas(String fechan, String fechan2) throws ExcepcionFecha {
 		String [] fecha_n = fechan.split("/"); 
     	String [] fecha_n2 = fechan2.split("/");
     	
@@ -26,10 +27,9 @@ public class Usuario {
     		
     		return true;
     		
-    	}else {
-    		
-    		return false;
-    		
+    	}else  {
+    		throw new ExcepcionFecha("FORMATO DE FECHAS INCORRECTO"); 
+    	
     	}
 	}
 	

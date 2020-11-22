@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.ArrayList;
 
+import Excepciones.ExcepcionFecha;
 import gestorAplicacion.cliente.Administrador;
 import gestorAplicacion.cliente.Cliente;
 import gestorAplicacion.factura.Factura;
@@ -923,36 +924,47 @@ public class VentanaPrincipal extends BorderPane {
 				String fechan = campos.get(0).getText();
 				String fechan2 = campos.get(1).getText();
 				
-				if(Usuario.confirmarFechas(fechan, fechan2)) {
-					if(!Factura.rangoDeFacturas(fechan, fechan2).isEmpty()) {
-		    			ArrayList<Producto> Productos = Usuario.productosMasVendidos(fechan, fechan2);
-		    			if(!Productos.isEmpty()) {
-		    				System.out.println("Nombre   Codido de barras   Cantidad");
-		            		for (int i = 0; i < Productos.size(); i++) {
-								System.out.println(Productos.get(i).toString());
-								}
-		    			}else {
-		    				//dialogo de informacion
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Informacion de balances");
-							alert.setHeaderText(null);
-							alert.setContentText("No se han vendido suficientes productos");
+				try {
+					if(Usuario.confirmarFechas(fechan, fechan2)) {
+						if(!Factura.rangoDeFacturas(fechan, fechan2).isEmpty()) {
+			    			ArrayList<Producto> Productos = Usuario.productosMasVendidos(fechan, fechan2);
+			    			if(!Productos.isEmpty()) {
+			    				System.out.println("Nombre   Codido de barras   Cantidad");
+			            		for (int i = 0; i < Productos.size(); i++) {
+									System.out.println(Productos.get(i).toString());
+									}
+			    			}else {
+			    				//dialogo de informacion
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Informacion de balances");
+								alert.setHeaderText(null);
+								alert.setContentText("No se han vendido suficientes productos");
 
-							alert.showAndWait();
-		    				//System.out.println("No se han vendido suficientes productos");
-		    			}
-		       
-		        		}else {
-		        			//dialogo de informacion
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Informacion de balances");
-							alert.setHeaderText(null);
-							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+								alert.showAndWait();
+			    				//System.out.println("No se han vendido suficientes productos");
+			    			}
+			       
+			        		}else {
+			        			//dialogo de informacion
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Informacion de balances");
+								alert.setHeaderText(null);
+								alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
 
-							alert.showAndWait();
-		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
-		        		}
+								alert.showAndWait();
+			        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
+			        		}
+					}
 				}
+				catch(ExcepcionFecha e){
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("ERROR GRAVISIMO");
+					alert.setHeaderText(null);
+					alert.setContentText(e.getMessage());
+
+					alert.showAndWait();
+				}
+				
 				
 			}
 								
