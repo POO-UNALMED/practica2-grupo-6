@@ -7,8 +7,31 @@ import java.util.Iterator;
 
 import gestorAplicacion.cliente.*;
 import gestorAplicacion.factura.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Usuario {
+	
+	
+	
+	static public boolean confirmarFechas(String fechan, String fechan2) {
+		String [] fecha_n = fechan.split("/"); 
+    	String [] fecha_n2 = fechan2.split("/");
+    	
+    	if(Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])==Integer.parseInt(fecha_n2[1])&&Integer.parseInt(fecha_n[0])<Integer.parseInt(fecha_n2[0])) {  		
+    		
+    		return true;
+    		
+    	}else if(Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])<Integer.parseInt(fecha_n2[1])) {
+    		
+    		return true;
+    		
+    	}else {
+    		
+    		return false;
+    		
+    	}
+	}
 	
 	 static public String devolucion(int codFac, int codProd, int cantidad) {        //
 		Factura d1 = Factura.consultarFactura(codFac);
