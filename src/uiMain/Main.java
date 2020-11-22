@@ -57,7 +57,7 @@ public class Main extends Application{
 		launch(args);
 		int numero;
 		
-		do {
+		/*do {
 			
 			System.out.println("---------------------------");
 			System.out.println("      CompuElectronics ");
@@ -70,7 +70,7 @@ public class Main extends Application{
 			System.out.println("---------------------------");
 			System.out.println("|3.Crear Pedido");
 			System.out.println("---------------------------");
-			System.out.println("|4.inventario");	/*un sub menu...1 editar inventario 2 salir*/
+			System.out.println("|4.inventario");	
 			System.out.println("---------------------------");
 			System.out.println("|5.Realizar devolucion");
 			System.out.println("---------------------------");
@@ -134,12 +134,13 @@ public class Main extends Application{
 		        
 			
 		}while(numero!=0);
+		*/
 		
 		
       
 
 	}
-	
+
 	public void start(Stage myStage) throws Exception{
 		window = myStage;
 		window.setTitle("Aplicacion");
@@ -154,9 +155,6 @@ public class Main extends Application{
 	
 	public void stop() {
 		Persistencia.guardarArchivos();
-		System.out.println("la app se cerro");
-		System.out.println("0");
-		
 	}	
 	
 	

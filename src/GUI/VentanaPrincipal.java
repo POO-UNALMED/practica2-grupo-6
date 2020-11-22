@@ -540,7 +540,7 @@ public class VentanaPrincipal extends BorderPane {
 				
 				else if((((MenuItem) cont).getText()).equals("Productos Mas Vendidos")) {
 					consultas = new VBox(10);
-					nombre.setText("Balances");
+					nombre.setText("Productos Mas Vendidos");
 					descripcion.setText("Permite la visualización de los productos mas vendidos dentro de \nun rango de fechas");
 					
 					Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
@@ -785,71 +785,51 @@ public class VentanaPrincipal extends BorderPane {
 				
 				String [] fecha_1 = fecha1.split("/"); 
 		    	String [] fecha_2 = fecha2.split("/");
-		    	
-		    	if(Integer.parseInt(fecha_1[2])==Integer.parseInt(fecha_2[2])&&Integer.parseInt(fecha_1[1])==Integer.parseInt(fecha_2[1])&&Integer.parseInt(fecha_1[0])<Integer.parseInt(fecha_2[0])) {
-		    		
-		    		if(!Factura.rangoDeFacturas(fecha1, fecha2).isEmpty()) {
-		    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
-		    			
-		    			if(!Productos.isEmpty()) {
-		    				System.out.println("Nombre   Codido de barras   Cantidad en inventario");
-		            		for (int i = 0; i < Productos.size(); i++) {
-								System.out.println(Productos.get(i).toString());
-		    			}
-							}else {
-								//dialogo de informacion
+		    	try {
+		    		if(Usuario.confirmarFechas(fecha1, fecha2)) {
+		    			if(!Factura.rangoDeFacturas(fecha1, fecha2).isEmpty()) {
+			    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
+			    			
+			    			if(!Productos.isEmpty()) {
+			    				System.out.println("Nombre   Codido de barras   Cantidad en inventario");
+			            		for (int i = 0; i < Productos.size(); i++) {
+									System.out.println(Productos.get(i).toString());
+			    			}
+								}else {
+									//dialogo de informacion
+									Alert alert = new Alert(AlertType.INFORMATION);
+									alert.setTitle("Informacion de busqueda");
+									alert.setHeaderText(null);
+									alert.setContentText("No hay suficientes productos vendidos");
+
+									alert.showAndWait();
+													
+								}
+			    			
+			        		}else {
+			        			//dialogo de informacion
 								Alert alert = new Alert(AlertType.INFORMATION);
 								alert.setTitle("Informacion de busqueda");
 								alert.setHeaderText(null);
-								alert.setContentText("No hay suficientes productos vendidos");
+								alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
 
 								alert.showAndWait();
-								
-								//System.out.println("No hay suficientes productos vendidos");
-														
-							}
-		        		}else {
-		        			//dialogo de informacion
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Informacion de busqueda");
-							alert.setHeaderText(null);
-							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
-
-							alert.showAndWait();
-		        			
-		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
-		        		}	    		
+			        			
+			        		}
+		    			
+		    		}
 		    		
-		    	}else if(Integer.parseInt(fecha_1[2])==Integer.parseInt(fecha_2[2])&&Integer.parseInt(fecha_1[1])<Integer.parseInt(fecha_2[1])) {
-		    		
-		    		if(!Factura.rangoDeFacturas(fecha1, fecha2).isEmpty()) {
-		    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
-		        		System.out.println("Nombre   Codido de barras   Cantidad");
-		        		for (int i = 0; i < Productos.size(); i++) {
-							System.out.println(Productos.get(i).toString());
-							}
-		        		}else {
-		        			//dialogo de informacion
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Informacion de busqueda");
-							alert.setHeaderText(null);
-							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
-
-							alert.showAndWait();
-		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
-		        		}
-		    		
-		    	}else {
-		    		//dialogo de informacion
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Informacion de busqueda");
+		    	}
+		    	catch(ExcepcionFecha e) {
+		    		Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("ERROR GRAVISIMO");
 					alert.setHeaderText(null);
-					alert.setContentText("El rango de las fechas no es correcto");
+					alert.setContentText(e.getMessage());
 
 					alert.showAndWait();
-		    		//System.out.println("El rango de las fechas no es correcto");
+					borrar();
 		    	}
-				
+		    	
 			}
 			
 		};
@@ -866,52 +846,33 @@ public class VentanaPrincipal extends BorderPane {
 				String [] fecha_f1 = f1.split("/"); 
 		    	String [] fecha_f2 = f2.split("/");
 		    	
-		    	if(Integer.parseInt(fecha_f1[2])==Integer.parseInt(fecha_f2[2])&&Integer.parseInt(fecha_f1[1])==Integer.parseInt(fecha_f2[1])&&Integer.parseInt(fecha_f1[0])<Integer.parseInt(fecha_f2[0])) {
-		    		
-		    		if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
-		    			System.out.println(Usuario.Balance(f1, f2));
-		    			
-		        		}else {
-		        			//dialogo de informacion
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Informacion de balances");
-							alert.setHeaderText(null);
-							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+		    	try {
+		    		if(Usuario.confirmarFechas(f1, f2)) {
+		    			if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
+			    			System.out.println(Usuario.Balance(f1, f2));
+			    			
+			        		}else {
+			        			//dialogo de informacion
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Informacion de balances");
+								alert.setHeaderText(null);
+								alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
 
-							alert.showAndWait();
-		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
-		        		}
-		    		
-		    		
-		    		
-		    		
-		    	}else if(Integer.parseInt(fecha_f1[2])==Integer.parseInt(fecha_f2[2])&&Integer.parseInt(fecha_f1[1])<Integer.parseInt(fecha_f2[1])) {
-		    		
-		    		if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
-		    			System.out.println(Usuario.Balance(f1, f2));
-		        		}else {
-		        			//dialogo de informacion
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Informacion de balances");
-							alert.setHeaderText(null);
-							alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
-
-							alert.showAndWait();
-		        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
-		        		}
-		    		
-		    	}else {
-		    		//dialogo de informacion
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Informacion de balances");
+								alert.showAndWait();
+			        			
+			        		}
+		    		}
+		    	}
+		    	catch(ExcepcionFecha e){
+		    		Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("ERROR GRAVISIMO");
 					alert.setHeaderText(null);
-					alert.setContentText("El rango de las fechas no es correcto");
+					alert.setContentText(e.getMessage());
 
 					alert.showAndWait();
-		    		//System.out.println("El rango de las fechas no es correcto");
-		    	} 
-					
-			}
+					borrar();
+		    	}
+			}  	
 			
 		};
 		///Productos mas vendidos
@@ -955,6 +916,8 @@ public class VentanaPrincipal extends BorderPane {
 			        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
 			        		}
 					}
+					
+					
 				}
 				catch(ExcepcionFecha e){
 					Alert alert = new Alert(AlertType.WARNING);

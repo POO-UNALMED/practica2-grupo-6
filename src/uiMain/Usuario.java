@@ -19,15 +19,18 @@ public class Usuario {
 		String [] fecha_n = fechan.split("/"); 
     	String [] fecha_n2 = fechan2.split("/");
     	
-    	if(Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])==Integer.parseInt(fecha_n2[1])&&Integer.parseInt(fecha_n[0])<Integer.parseInt(fecha_n2[0])) {  		
+    	if(fecha_n.length==3 && fecha_n2.length == 3 && Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])==Integer.parseInt(fecha_n2[1])&&Integer.parseInt(fecha_n[0])<Integer.parseInt(fecha_n2[0])
+    			  ) {  		
     		
     		return true;
     		
-    	}else if(Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])<Integer.parseInt(fecha_n2[1])) {
+    	}else if(fecha_n.length==3 && fecha_n2.length == 3 && Integer.parseInt(fecha_n[2])==Integer.parseInt(fecha_n2[2])&&Integer.parseInt(fecha_n[1])<Integer.parseInt(fecha_n2[1])
+    			 ) {
     		
     		return true;
     		
-    	}else  {
+    	}
+    	else  {
     		throw new ExcepcionFecha("FORMATO DE FECHAS INCORRECTO"); 
     	
     	}
