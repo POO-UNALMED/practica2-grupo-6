@@ -963,6 +963,7 @@ public class VentanaPrincipal extends BorderPane {
 					alert.setContentText(e.getMessage());
 
 					alert.showAndWait();
+					borrar();
 				}
 				
 				
@@ -976,10 +977,7 @@ public class VentanaPrincipal extends BorderPane {
 
 			@Override
 			public void handle(ActionEvent event) {
-				campos =pane.getCampos();
-				for (int i = 0; i < campos.size(); i++) {
-					campos.get(i).setText("");
-				}
+				borrar();
 				
 			}
 			
@@ -1030,5 +1028,12 @@ public class VentanaPrincipal extends BorderPane {
 			}
 			
 		};
+		
+		private void borrar() {
+			campos =pane.getCampos();
+			for (int i = 0; i < campos.size(); i++) {
+				campos.get(i).setText("");
+			}
+		}
 
 }
