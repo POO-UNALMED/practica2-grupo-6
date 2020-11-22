@@ -2,6 +2,7 @@ package GUI;
 
 import java.util.ArrayList;
 
+import Excepciones.ExcepcionCamposVacios;
 import Excepciones.ExcepcionFecha;
 import gestorAplicacion.cliente.Administrador;
 import gestorAplicacion.cliente.Cliente;
@@ -624,14 +625,20 @@ public class VentanaPrincipal extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			campos =pane.getCampos();
-			int id = Integer.parseInt(campos.get(1).getText());
-			double salario = Double.parseDouble(campos.get(6).getText());
 			
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Resultado");
-			alert.setHeaderText(null);
-			alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-			alert.showAndWait();		
+			if(verificarCampos()) {
+				int id = Integer.parseInt(campos.get(1).getText());
+				double salario = Double.parseDouble(campos.get(6).getText());
+				
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Resultado");
+				alert.setHeaderText(null);
+				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
+				alert.showAndWait();
+				borrar();
+			}
+			
 		}
 		
 	};
@@ -642,19 +649,22 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				ArrayList<TextField> campos= pane.getCampos();
-				int id = Integer.parseInt(campos.get(0).getText());
-				int idc = Integer.parseInt(campos.get(2).getText());
-				Administrador admin = Administrador.consultarAdmin(id);
-				if(admin!=null) {
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Resultado");
-					alert.setHeaderText(null);
-					alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
-					alert.showAndWait();
-					
-				}
-				else {
-					System.out.println("Identificacion incorrecta");
+				
+				if(verificarCampos()) {
+					int id = Integer.parseInt(campos.get(0).getText());
+					int idc = Integer.parseInt(campos.get(2).getText());
+					Administrador admin = Administrador.consultarAdmin(id);
+					if(admin!=null) {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Resultado");
+						alert.setHeaderText(null);
+						alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
+						alert.showAndWait();
+						borrar();
+					}
+					else {
+						System.out.println("Identificacion incorrecta");
+					}
 				}
 						
 			}
@@ -668,24 +678,26 @@ public class VentanaPrincipal extends BorderPane {
 		@Override
 		public void handle(ActionEvent arg0) {
 			campos =pane.getCampos();
-			int id = Integer.parseInt(campos.get(0).getText());
-			int cantidad = Integer.parseInt(campos.get(4).getText());
-			double precio = Double.parseDouble(campos.get(5).getText());
 			
-			Administrador admin = Administrador.consultarAdmin(id);
-			if(admin!=null) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resultado");
-				alert.setHeaderText(null);
-				alert.setContentText(Usuario.registrarProducto(admin,campos.get(1).getText(),campos.get(2).getText(), campos.get(3).getText(),cantidad,precio ));
-				alert.showAndWait();
+			if(verificarCampos()) {
+				int id = Integer.parseInt(campos.get(0).getText());
+				int cantidad = Integer.parseInt(campos.get(4).getText());
+				double precio = Double.parseDouble(campos.get(5).getText());
 				
-			}
-			else {
-				System.out.println("Identificacion incorrecta");
+				Administrador admin = Administrador.consultarAdmin(id);
+				if(admin!=null) {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Resultado");
+					alert.setHeaderText(null);
+					alert.setContentText(Usuario.registrarProducto(admin,campos.get(1).getText(),campos.get(2).getText(), campos.get(3).getText(),cantidad,precio ));
+					alert.showAndWait();
+					borrar();
+				}
+				else {
+					System.out.println("Identificacion incorrecta");
+				}
 			}
 			
-					
 		}
 		
 	};
@@ -698,28 +710,33 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
-				int id = Integer.parseInt(campos.get(0).getText());				
-				Long codPro1 = Long.parseLong(campos.get(1).getText());
-				int cantidad = Integer.parseInt(campos.get(2).getText());
-				Administrador admin = Administrador.consultarAdmin(id);
-				if(admin!=null) {
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Resultado");
-					alert.setHeaderText(null);
-					alert.setContentText(Usuario.agregarInventario(admin, codPro1, cantidad));
-					alert.showAndWait();
+				
+				if(verificarCampos()) {
 					
-				}
-				else {
-					//dialogo de informacion
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Editar inventario dice..");
-					alert.setHeaderText(null);
-					alert.setContentText("Identificacion de administrador incorrecta");
+					int id = Integer.parseInt(campos.get(0).getText());				
+					Long codPro1 = Long.parseLong(campos.get(1).getText());
+					int cantidad = Integer.parseInt(campos.get(2).getText());
+					Administrador admin = Administrador.consultarAdmin(id);
+					if(admin!=null) {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Resultado");
+						alert.setHeaderText(null);
+						alert.setContentText(Usuario.agregarInventario(admin, codPro1, cantidad));
+						alert.showAndWait();
+						borrar();
+					}
+					else {
+						//dialogo de informacion
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Editar inventario dice..");
+						alert.setHeaderText(null);
+						alert.setContentText("Identificacion de administrador incorrecta");
 
-					alert.showAndWait();
-					//System.out.println("Identificacion de administrador incorrecta");
+						alert.showAndWait();
+						borrar();
+					}
 				}
+
 						
 			}
 			
@@ -734,41 +751,39 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
-				int id = Integer.parseInt(campos.get(0).getText());
-				int codF = Integer.parseInt(campos.get(1).getText());
-				int codDet = Integer.parseInt(campos.get(2).getText());
-				int cantidad = Integer.parseInt(campos.get(3).getText());
-				Cliente devolucion = Cliente.consultarCliente(id);
-				if(devolucion!=null) {
-					Factura consulta = Factura.consultarFactura(codF);
-		    		
-		    		if(consulta!=null) {
-		    			if(consulta.getPedido().consultarProducto(codDet)!=null) {
-		    				Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Resultado");
-							alert.setHeaderText(null);
-							alert.setContentText(Usuario.devolucion(codF, codDet, cantidad));
-							alert.showAndWait();
-		    				
-		    			}else {
-		    				System.out.println("producto no encontrado");
+				
+				if(verificarCampos()) {
+					int id = Integer.parseInt(campos.get(0).getText());
+					int codF = Integer.parseInt(campos.get(1).getText());
+					int codDet = Integer.parseInt(campos.get(2).getText());
+					int cantidad = Integer.parseInt(campos.get(3).getText());
+					Cliente devolucion = Cliente.consultarCliente(id);
+					if(devolucion!=null) {
+						Factura consulta = Factura.consultarFactura(codF);
+			    		
+			    		if(consulta!=null) {
+			    			if(consulta.getPedido().consultarProducto(codDet)!=null) {
+			    				Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Resultado");
+								alert.setHeaderText(null);
+								alert.setContentText(Usuario.devolucion(codF, codDet, cantidad));
+								alert.showAndWait();
+								borrar();
+			    			}else {
+			    				System.out.println("producto no encontrado");
+							}
+	
+			    		}
+			    		else {
+			    			System.out.println("No se encontro factura");
 						}
-		    			
-		    			
-		    			
-		    		}
-		    		else {
-		    			System.out.println("No se encontro factura");
+		
+					}else {
+		    			System.out.println("No se encontro cliente");
 					}
 					
-					
-						
-						
-				}else {
-	    			System.out.println("No se encontro cliente");
 				}
-				
-					
+		
 			}
 			
 		};
@@ -779,57 +794,59 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
-				//main
-				String fecha1 = campos.get(0).getText();
-				String fecha2 = campos.get(1).getText();
 				
-				String [] fecha_1 = fecha1.split("/"); 
-		    	String [] fecha_2 = fecha2.split("/");
-		    	try {
-		    		if(Usuario.confirmarFechas(fecha1, fecha2)) {
-		    			if(!Factura.rangoDeFacturas(fecha1, fecha2).isEmpty()) {
-			    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
-			    			
-			    			if(!Productos.isEmpty()) {
-			    				System.out.println("Nombre   Codido de barras   Cantidad en inventario");
-			            		for (int i = 0; i < Productos.size(); i++) {
-									System.out.println(Productos.get(i).toString());
-			    			}
-								}else {
-									//dialogo de informacion
+				if(verificarCampos()) {
+					String fecha1 = campos.get(0).getText();
+					String fecha2 = campos.get(1).getText();
+					
+					String [] fecha_1 = fecha1.split("/"); 
+			    	String [] fecha_2 = fecha2.split("/");
+			    	try {
+			    		if(Usuario.confirmarFechas(fecha1, fecha2)) {
+			    			if(!Factura.rangoDeFacturas(fecha1, fecha2).isEmpty()) {
+				    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
+				    			
+				    			if(!Productos.isEmpty()) {
+				    				System.out.println("Nombre   Codido de barras   Cantidad en inventario");
+				            		for (int i = 0; i < Productos.size(); i++) {
+										System.out.println(Productos.get(i).toString());
+				    			}
+									}else {
+										//dialogo de informacion
+										Alert alert = new Alert(AlertType.INFORMATION);
+										alert.setTitle("Informacion de busqueda");
+										alert.setHeaderText(null);
+										alert.setContentText("No hay suficientes productos vendidos");
+
+										alert.showAndWait();
+										borrar();				
+									}
+				    			
+				        		}else {
+				        			//dialogo de informacion
 									Alert alert = new Alert(AlertType.INFORMATION);
 									alert.setTitle("Informacion de busqueda");
 									alert.setHeaderText(null);
-									alert.setContentText("No hay suficientes productos vendidos");
+									alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
 
 									alert.showAndWait();
-													
-								}
+									borrar();
+				        		}
 			    			
-			        		}else {
-			        			//dialogo de informacion
-								Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Informacion de busqueda");
-								alert.setHeaderText(null);
-								alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+			    		}
+			    		
+			    	}
+			    	catch(ExcepcionFecha e) {
+			    		Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("ERROR GRAVISIMO");
+						alert.setHeaderText(null);
+						alert.setContentText(e.getMessage());
 
-								alert.showAndWait();
-			        			
-			        		}
-		    			
-		    		}
-		    		
-		    	}
-		    	catch(ExcepcionFecha e) {
-		    		Alert alert = new Alert(AlertType.WARNING);
-					alert.setTitle("ERROR GRAVISIMO");
-					alert.setHeaderText(null);
-					alert.setContentText(e.getMessage());
-
-					alert.showAndWait();
-					borrar();
-		    	}
-		    	
+						alert.showAndWait();
+						borrar();
+			    	}
+				}
+	
 			}
 			
 		};
@@ -839,39 +856,43 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
-				//main
-				String f1 = campos.get(0).getText();
-				String f2 = campos.get(1).getText();
 				
-				String [] fecha_f1 = f1.split("/"); 
-		    	String [] fecha_f2 = f2.split("/");
-		    	
-		    	try {
-		    		if(Usuario.confirmarFechas(f1, f2)) {
-		    			if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
-			    			System.out.println(Usuario.Balance(f1, f2));
-			    			
-			        		}else {
-			        			//dialogo de informacion
-								Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Informacion de balances");
-								alert.setHeaderText(null);
-								alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+				if(verificarCampos()) {
+					
+					String f1 = campos.get(0).getText();
+					String f2 = campos.get(1).getText();
+					
+					String [] fecha_f1 = f1.split("/"); 
+			    	String [] fecha_f2 = f2.split("/");
+			    	
+			    	try {
+			    		if(Usuario.confirmarFechas(f1, f2)) {
+			    			if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
+				    			System.out.println(Usuario.Balance(f1, f2));
+				    			
+				        		}else {
+				        			//dialogo de informacion
+									Alert alert = new Alert(AlertType.INFORMATION);
+									alert.setTitle("Informacion de balances");
+									alert.setHeaderText(null);
+									alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
 
-								alert.showAndWait();
-			        			
-			        		}
-		    		}
-		    	}
-		    	catch(ExcepcionFecha e){
-		    		Alert alert = new Alert(AlertType.WARNING);
-					alert.setTitle("ERROR GRAVISIMO");
-					alert.setHeaderText(null);
-					alert.setContentText(e.getMessage());
+									alert.showAndWait();
+									borrar();
+				        		}
+			    		}
+			    	}
+			    	catch(ExcepcionFecha e){
+			    		Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("ERROR GRAVISIMO");
+						alert.setHeaderText(null);
+						alert.setContentText(e.getMessage());
 
-					alert.showAndWait();
-					borrar();
-		    	}
+						alert.showAndWait();
+						borrar();
+			    	}
+				}
+			
 			}  	
 			
 		};
@@ -881,53 +902,55 @@ public class VentanaPrincipal extends BorderPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				campos =pane.getCampos();
-				//main
-				String fechan = campos.get(0).getText();
-				String fechan2 = campos.get(1).getText();
-				
-				try {
-					if(Usuario.confirmarFechas(fechan, fechan2)) {
-						if(!Factura.rangoDeFacturas(fechan, fechan2).isEmpty()) {
-			    			ArrayList<Producto> Productos = Usuario.productosMasVendidos(fechan, fechan2);
-			    			if(!Productos.isEmpty()) {
-			    				System.out.println("Nombre   Codido de barras   Cantidad");
-			            		for (int i = 0; i < Productos.size(); i++) {
-									System.out.println(Productos.get(i).toString());
-									}
-			    			}else {
-			    				//dialogo de informacion
-								Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Informacion de balances");
-								alert.setHeaderText(null);
-								alert.setContentText("No se han vendido suficientes productos");
+				if(verificarCampos()) {
+					String fechan = campos.get(0).getText();
+					String fechan2 = campos.get(1).getText();
+					
+					try {
+						if(Usuario.confirmarFechas(fechan, fechan2)) {
+							if(!Factura.rangoDeFacturas(fechan, fechan2).isEmpty()) {
+				    			ArrayList<Producto> Productos = Usuario.productosMasVendidos(fechan, fechan2);
+				    			if(!Productos.isEmpty()) {
+				    				System.out.println("Nombre   Codido de barras   Cantidad");
+				            		for (int i = 0; i < Productos.size(); i++) {
+										System.out.println(Productos.get(i).toString());
+										}
+				    			}else {
+				    				//dialogo de informacion
+									Alert alert = new Alert(AlertType.INFORMATION);
+									alert.setTitle("Informacion de balances");
+									alert.setHeaderText(null);
+									alert.setContentText("No se han vendido suficientes productos");
 
-								alert.showAndWait();
-			    				//System.out.println("No se han vendido suficientes productos");
-			    			}
-			       
-			        		}else {
-			        			//dialogo de informacion
-								Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Informacion de balances");
-								alert.setHeaderText(null);
-								alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
+									alert.showAndWait();
+									borrar();
+				    			}
+				       
+				        		}else {
+				        			//dialogo de informacion
+									Alert alert = new Alert(AlertType.INFORMATION);
+									alert.setTitle("Informacion de balances");
+									alert.setHeaderText(null);
+									alert.setContentText("No hay facturas realizadas en el rango de tiempo pedido");
 
-								alert.showAndWait();
-			        			//System.out.println("No hay facturas realizadas en el rango de tiempo pedido");
-			        		}
+									alert.showAndWait();
+									borrar();
+				        		}
+						}
+						
+						
 					}
-					
-					
-				}
-				catch(ExcepcionFecha e){
-					Alert alert = new Alert(AlertType.WARNING);
-					alert.setTitle("ERROR GRAVISIMO");
-					alert.setHeaderText(null);
-					alert.setContentText(e.getMessage());
+					catch(ExcepcionFecha e){
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("ERROR GRAVISIMO");
+						alert.setHeaderText(null);
+						alert.setContentText(e.getMessage());
 
-					alert.showAndWait();
-					borrar();
+						alert.showAndWait();
+						borrar();
+					}
 				}
+				
 				
 				
 			}
@@ -952,41 +975,44 @@ public class VentanaPrincipal extends BorderPane {
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				campos = pane.getCampos();
-				int idAdmin = Integer.parseInt(campos.get(0).getText());
-				int idClient = Integer.parseInt(campos.get(1).getText());
-				Administrador Admin = Administrador.consultarAdmin(idAdmin);
-				Cliente cliente = Cliente.consultarCliente(idClient);
-				if(Admin!=null) {
-					if (cliente!=null) {
-						Pedido pedido = Usuario.crearPedido(Admin);
-						VentanaPedido pedido1 = new VentanaPedido();
-						setCenter(pedido1);
-						setMargin(pedido1, i);
-						pedido1.setCliente(cliente);
-						pedido1.setAdmin(Admin);
-						pedido1.setPedido(pedido);
+				
+				if(verificarCampos()) {
+					int idAdmin = Integer.parseInt(campos.get(0).getText());
+					int idClient = Integer.parseInt(campos.get(1).getText());
+					Administrador Admin = Administrador.consultarAdmin(idAdmin);
+					Cliente cliente = Cliente.consultarCliente(idClient);
+					if(Admin!=null) {
+						if (cliente!=null) {
+							Pedido pedido = Usuario.crearPedido(Admin);
+							VentanaPedido pedido1 = new VentanaPedido();
+							setCenter(pedido1);
+							setMargin(pedido1, i);
+							pedido1.setCliente(cliente);
+							pedido1.setAdmin(Admin);
+							pedido1.setPedido(pedido);
+						}else {
+							//dialogo de informacion
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Informacion de pedido");
+							alert.setHeaderText(null);
+							alert.setContentText("Cliente no registrado");
+
+							alert.showAndWait();
+							borrar();
+						}
+
 					}else {
 						//dialogo de informacion
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("Informacion de pedido");
 						alert.setHeaderText(null);
-						alert.setContentText("Cliente no registrado");
+						alert.setContentText("Administrador no registrado");
 
 						alert.showAndWait();
+						borrar();
 					}
 					
-					
-					
-				}else {
-					//dialogo de informacion
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Informacion de pedido");
-					alert.setHeaderText(null);
-					alert.setContentText("Administrador no registrado");
-
-					alert.showAndWait();
 				}
-				
 				
 			}
 			
@@ -996,6 +1022,40 @@ public class VentanaPrincipal extends BorderPane {
 			campos =pane.getCampos();
 			for (int i = 0; i < campos.size(); i++) {
 				campos.get(i).setText("");
+			}
+		}
+		
+		
+		public boolean verificarCampos() {
+			campos = pane.getCampos();
+			String camposFaltantes = "";
+			String [] criterios = pane.getCriterios();
+			
+			for (int i = 0; i < campos.size(); i++) {
+				if(campos.get(i).getText()==null) {
+					camposFaltantes+=criterios[i]+"\n";
+				}
+				else if(campos.get(i).getText().replace(" ", "").equals("")) {
+					camposFaltantes+=criterios[i]+"\n";
+				}
+			}
+			
+			try {
+				if(camposFaltantes.length()>=1) {
+					throw new ExcepcionCamposVacios("Faltan por llenar campos");
+				}
+				else {
+					return true;
+				}
+			}
+			catch(ExcepcionCamposVacios e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle(e.getMessage());
+				alert.setHeaderText(null);
+				alert.setContentText(camposFaltantes);
+
+				alert.showAndWait();
+				return false;
 			}
 		}
 

@@ -21,6 +21,7 @@ public class FieldPane extends HBox {
 	boolean [] habilitado;
 	ArrayList<TextField> campos = new ArrayList<>();
 	
+	
 	public FieldPane(String tituloCriterios, String[] criterios, String valor,String[] valores, boolean[] habilitado) {
 		super();
 		this.tituloCriterios = tituloCriterios;
@@ -68,6 +69,10 @@ public class FieldPane extends HBox {
 
 	public ArrayList<TextField> getCampos() {
 		return campos;
+	}
+	
+	public String[] getCriterios(){
+		return criterios;
 	}
 	
 	
