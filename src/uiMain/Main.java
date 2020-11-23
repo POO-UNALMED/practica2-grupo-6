@@ -151,6 +151,7 @@ public class Main extends Application{
 		
 		window.setScene(scene1);
 		window.show();
+		window.setResizable(false);
 	}
 	
 	public void stop() {
