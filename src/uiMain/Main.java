@@ -415,6 +415,7 @@ public class Main extends Application{
 			}
 		}
 		else {
+			//posible manejo de error
 			System.out.println("No hay clientes suficientes para esta funcion");
 		}
 	}

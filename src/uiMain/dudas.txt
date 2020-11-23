@@ -1,0 +1,14 @@
+2.3.2. Muestra de resultados de procesos y/o consultas:
+La parte inferior de la ventana de la aplicación mostrará los resultados de los procesos y las consultas. La lista
+(que es de tipo texto) deberá aumentar de tamaño ocupando todo el espacio disponible cuando se
+redimensiona la ventana. Se debe considerar además que existen algunos procesos que pueden necesitar de
+otras ventanas para representar la actividad. Este tipo de procesos y/o consultas deben considerar en su
+nueva ventana, una estructura similar a la ya planteada, donde se presente un menú superior y una lista de
+resultados.
+
+
+MANEJO DE ERRORES,
+-En registrar cliente, se solicita un id de administrador para registrar al cliente, 
+cuando el id del administrador es incorrecto, se puede tomar este como un error? porque en muchas funcionalidades se requiere un id de admin
+(registrar cliente,regstrar producto...)
+
