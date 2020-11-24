@@ -663,7 +663,14 @@ public class VentanaPrincipal extends BorderPane {
 						borrar();
 					}
 					else {
-						System.out.println("Identificacion incorrecta");
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Registrar cliente dice...");
+						alert.setHeaderText(null);
+						alert.setContentText("Identificacion admin incorrecta");
+
+						alert.showAndWait();
+						borrar();
+						//System.out.println("Identificacion incorrecta");
 					}
 				}
 						
@@ -694,7 +701,15 @@ public class VentanaPrincipal extends BorderPane {
 					borrar();
 				}
 				else {
-					System.out.println("Identificacion incorrecta");
+					//dialogo de informacion
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Registrar producto dice..");
+					alert.setHeaderText(null);
+					alert.setContentText("Identificacion incorrecta");
+
+					alert.showAndWait();
+					borrar();
+					//System.out.println("Identificacion incorrecta");
 				}
 			}
 			
@@ -770,16 +785,34 @@ public class VentanaPrincipal extends BorderPane {
 								alert.showAndWait();
 								borrar();
 			    			}else {
-			    				System.out.println("producto no encontrado");
+			    				Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Realizar devolucion");
+								alert.setHeaderText(null);
+								alert.setContentText("producto con codigo ingresado no encontrado");
+								alert.showAndWait();
+								borrar();
+			    				//System.out.println("producto no encontrado");
 							}
 	
 			    		}
 			    		else {
-			    			System.out.println("No se encontro factura");
+			    			Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Realizar devolucion");
+							alert.setHeaderText(null);
+							alert.setContentText("No se encontro factura");
+							alert.showAndWait();
+							borrar();
+			    			//ystem.out.println("No se encontro factura");
 						}
 		
 					}else {
-		    			System.out.println("No se encontro cliente");
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Realizar devolucion");
+						alert.setHeaderText(null);
+						alert.setContentText("No se encontro cliente");
+						alert.showAndWait();
+						borrar();
+						//System.out.println("No se encontro cliente");
 					}
 					
 				}
