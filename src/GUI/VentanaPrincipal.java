@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import Excepciones.ExcepcionCamposVacios;
 import Excepciones.ExcepcionFecha;
+import Excepciones.ExcepcionObjetoNoEncontrado;
+import Excepciones.ExcepcionVerificarTipoDato;
 import gestorAplicacion.cliente.Administrador;
 import gestorAplicacion.cliente.Cliente;
 import gestorAplicacion.factura.Factura;
@@ -627,16 +629,27 @@ public class VentanaPrincipal extends BorderPane {
 			campos =pane.getCampos();
 			
 			if(verificarCampos()) {
-				int id = Integer.parseInt(campos.get(1).getText());
-				double salario = Double.parseDouble(campos.get(6).getText());
+				try {
+					if(isNumeric(campos.get(1).getText()) && isDouble(campos.get(6).getText())){
+						int id = Integer.parseInt(campos.get(1).getText());
+						double salario = Double.parseDouble(campos.get(6).getText());
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Resultado");
+						alert.setHeaderText(null);
+						alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
+						alert.showAndWait();
+						borrar();}
+				}
+				catch(ExcepcionVerificarTipoDato e){
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Error Gravisimo");
+					alert.setHeaderText(null);
+					alert.setContentText(e.getMessage()+"\n en Identificacion y/o Salario");
+
+					alert.showAndWait();
+					borrar();
+				}
 				
-				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Resultado");
-				alert.setHeaderText(null);
-				alert.setContentText(Usuario.registrarAdmin(campos.get(0).getText(), id, campos.get(2).getText(), campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), salario, campos.get(7).getText()));
-				alert.showAndWait();
-				borrar();
 			}
 			
 		}
@@ -651,27 +664,47 @@ public class VentanaPrincipal extends BorderPane {
 				ArrayList<TextField> campos= pane.getCampos();
 				
 				if(verificarCampos()) {
-					int id = Integer.parseInt(campos.get(0).getText());
-					int idc = Integer.parseInt(campos.get(2).getText());
-					Administrador admin = Administrador.consultarAdmin(id);
-					if(admin!=null) {
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Resultado");
-						alert.setHeaderText(null);
-						alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
-						alert.showAndWait();
-						borrar();
+					try {
+						if(isNumeric(campos.get(0).getText()) && isNumeric(campos.get(2).getText())) {
+							int id = Integer.parseInt(campos.get(0).getText());
+							int idc = Integer.parseInt(campos.get(2).getText());
+							Administrador admin = Administrador.consultarAdmin(id);
+							if(admin!=null) {
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Resultado");
+								alert.setHeaderText(null);
+								alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
+								alert.showAndWait();
+								borrar();
+							}
+							else {
+								throw new ExcepcionObjetoNoEncontrado("Administrador no encontrado");
+							}
+						}
+						
+						
 					}
-					else {
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Registrar cliente dice...");
+					catch(ExcepcionObjetoNoEncontrado e) {
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
 						alert.setHeaderText(null);
-						alert.setContentText("Identificacion admin incorrecta");
+						alert.setContentText(e.getMessage());
 
 						alert.showAndWait();
 						borrar();
-						//System.out.println("Identificacion incorrecta");
+					
 					}
+					catch(ExcepcionVerificarTipoDato f){
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
+						alert.setHeaderText(null);
+						alert.setContentText(f.getMessage()+"\n en ID administrador y/o Identificacion");
+
+						alert.showAndWait();
+						borrar();
+					}
+					
+					
 				}
 						
 			}
@@ -687,30 +720,47 @@ public class VentanaPrincipal extends BorderPane {
 			campos =pane.getCampos();
 			
 			if(verificarCampos()) {
-				int id = Integer.parseInt(campos.get(0).getText());
-				int cantidad = Integer.parseInt(campos.get(4).getText());
-				double precio = Double.parseDouble(campos.get(5).getText());
-				
-				Administrador admin = Administrador.consultarAdmin(id);
-				if(admin!=null) {
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Resultado");
-					alert.setHeaderText(null);
-					alert.setContentText(Usuario.registrarProducto(admin,campos.get(1).getText(),campos.get(2).getText(), campos.get(3).getText(),cantidad,precio ));
-					alert.showAndWait();
-					borrar();
+				try {
+					if(isNumeric(campos.get(0).getText()) && isNumeric(campos.get(4).getText()) && isDouble(campos.get(5).getText())) {
+						int id = Integer.parseInt(campos.get(0).getText());
+						int cantidad = Integer.parseInt(campos.get(4).getText());
+						double precio = Double.parseDouble(campos.get(5).getText());
+						
+						Administrador admin = Administrador.consultarAdmin(id);
+						if(admin!=null) {
+							Alert alert = new Alert(AlertType.INFORMATION);
+							alert.setTitle("Resultado");
+							alert.setHeaderText(null);
+							alert.setContentText(Usuario.registrarProducto(admin,campos.get(1).getText(),campos.get(2).getText(), campos.get(3).getText(),cantidad,precio ));
+							alert.showAndWait();
+							borrar();
+						}
+						else {
+							throw new ExcepcionObjetoNoEncontrado("Administrador no encontrado");
+						}
+					}
+					
 				}
-				else {
-					//dialogo de informacion
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Registrar producto dice..");
+				catch(ExcepcionObjetoNoEncontrado e) {
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Error Gravisimo");
 					alert.setHeaderText(null);
-					alert.setContentText("Identificacion incorrecta");
+					alert.setContentText(e.getMessage());
 
 					alert.showAndWait();
 					borrar();
-					//System.out.println("Identificacion incorrecta");
+				
 				}
+				catch(ExcepcionVerificarTipoDato a){
+					Alert alert = new Alert(AlertType.WARNING);
+					alert.setTitle("Error Gravisimo");
+					alert.setHeaderText(null);
+					alert.setContentText(a.getMessage()+"\n en ID administrador o Cantida o Precio");
+
+					alert.showAndWait();
+					borrar();
+				}
+				
 			}
 			
 		}
@@ -727,25 +777,41 @@ public class VentanaPrincipal extends BorderPane {
 				campos =pane.getCampos();
 				
 				if(verificarCampos()) {
-					
-					int id = Integer.parseInt(campos.get(0).getText());				
-					Long codPro1 = Long.parseLong(campos.get(1).getText());
-					int cantidad = Integer.parseInt(campos.get(2).getText());
-					Administrador admin = Administrador.consultarAdmin(id);
-					if(admin!=null) {
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Resultado");
+					try {
+						if(isNumeric(campos.get(0).getText()) && isLong(campos.get(1).getText()) && isNumeric(campos.get(2).getText())) {
+							int id = Integer.parseInt(campos.get(0).getText());				
+							Long codPro1 = Long.parseLong(campos.get(1).getText());
+							int cantidad = Integer.parseInt(campos.get(2).getText());
+							Administrador admin = Administrador.consultarAdmin(id);
+							if(admin!=null) {
+								Alert alert = new Alert(AlertType.INFORMATION);
+								alert.setTitle("Resultado");
+								alert.setHeaderText(null);
+								alert.setContentText(Usuario.agregarInventario(admin, codPro1, cantidad));
+								alert.showAndWait();
+								borrar();
+							}
+							else {
+								//dialogo de informacion
+								throw new ExcepcionObjetoNoEncontrado("Administrador no encontrado");
+							}
+						}
+						
+					}
+					catch(ExcepcionObjetoNoEncontrado e) {
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
 						alert.setHeaderText(null);
-						alert.setContentText(Usuario.agregarInventario(admin, codPro1, cantidad));
+						alert.setContentText(e.getMessage());
+
 						alert.showAndWait();
 						borrar();
 					}
-					else {
-						//dialogo de informacion
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Editar inventario dice..");
+					catch(ExcepcionVerificarTipoDato a){
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
 						alert.setHeaderText(null);
-						alert.setContentText("Identificacion de administrador incorrecta");
+						alert.setContentText(a.getMessage()+"\n en ID administrador o Codigo del producto o Nueva cantidad");
 
 						alert.showAndWait();
 						borrar();
@@ -768,53 +834,61 @@ public class VentanaPrincipal extends BorderPane {
 				campos =pane.getCampos();
 				
 				if(verificarCampos()) {
-					int id = Integer.parseInt(campos.get(0).getText());
-					int codF = Integer.parseInt(campos.get(1).getText());
-					int codDet = Integer.parseInt(campos.get(2).getText());
-					int cantidad = Integer.parseInt(campos.get(3).getText());
-					Cliente devolucion = Cliente.consultarCliente(id);
-					if(devolucion!=null) {
-						Factura consulta = Factura.consultarFactura(codF);
-			    		
-			    		if(consulta!=null) {
-			    			if(consulta.getPedido().consultarProducto(codDet)!=null) {
-			    				Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Resultado");
-								alert.setHeaderText(null);
-								alert.setContentText(Usuario.devolucion(codF, codDet, cantidad));
-								alert.showAndWait();
-								borrar();
-			    			}else {
-			    				Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Realizar devolucion");
-								alert.setHeaderText(null);
-								alert.setContentText("producto con codigo ingresado no encontrado");
-								alert.showAndWait();
-								borrar();
-			    				//System.out.println("producto no encontrado");
+					try {
+						if(isNumeric(campos.get(0).getText()) && isNumeric(campos.get(0).getText()) && isNumeric(campos.get(0).getText())
+								&& isNumeric(campos.get(0).getText())) {
+							int id = Integer.parseInt(campos.get(0).getText());
+							int codF = Integer.parseInt(campos.get(1).getText());
+							int codDet = Integer.parseInt(campos.get(2).getText());
+							int cantidad = Integer.parseInt(campos.get(3).getText());
+							Cliente devolucion = Cliente.consultarCliente(id);
+							if(devolucion!=null) {
+								Factura consulta = Factura.consultarFactura(codF);
+					    		
+					    		if(consulta!=null) {
+					    			if(consulta.getPedido().consultarProducto(codDet)!=null) {
+					    				Alert alert = new Alert(AlertType.INFORMATION);
+										alert.setTitle("Resultado");
+										alert.setHeaderText(null);
+										alert.setContentText(Usuario.devolucion(codF, codDet, cantidad));
+										alert.showAndWait();
+										borrar();
+					    			}else {
+										throw new ExcepcionObjetoNoEncontrado("Producto no encontrado");
+					    				
+									}
+			
+					    		}
+					    		else {
+									throw new ExcepcionObjetoNoEncontrado("Factura no encontrada");
+					    			
+								}
+				
+							}else {
+								throw new ExcepcionObjetoNoEncontrado("Cliente no encontrado");
+							
 							}
-	
-			    		}
-			    		else {
-			    			Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Realizar devolucion");
-							alert.setHeaderText(null);
-							alert.setContentText("No se encontro factura");
-							alert.showAndWait();
-							borrar();
-			    			//ystem.out.println("No se encontro factura");
 						}
-		
-					}else {
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Realizar devolucion");
+						}
+						
+					catch(ExcepcionObjetoNoEncontrado e) {
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
 						alert.setHeaderText(null);
-						alert.setContentText("No se encontro cliente");
+						alert.setContentText(e.getMessage());
 						alert.showAndWait();
 						borrar();
-						//System.out.println("No se encontro cliente");
 					}
-					
+					catch(ExcepcionVerificarTipoDato a) {
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
+						alert.setHeaderText(null);
+						alert.setContentText(a.getMessage()+"\n en alguno de los campos");
+
+						alert.showAndWait();
+						borrar();
+					}
+						
 				}
 		
 			}
@@ -1001,6 +1075,7 @@ public class VentanaPrincipal extends BorderPane {
 			}
 			
 		};
+		//crear pedido
 		
 		EventHandler<ActionEvent> Siguiente = new EventHandler<ActionEvent>() {
 
@@ -1010,42 +1085,56 @@ public class VentanaPrincipal extends BorderPane {
 				campos = pane.getCampos();
 				
 				if(verificarCampos()) {
-					int idAdmin = Integer.parseInt(campos.get(0).getText());
-					int idClient = Integer.parseInt(campos.get(1).getText());
-					Administrador Admin = Administrador.consultarAdmin(idAdmin);
-					Cliente cliente = Cliente.consultarCliente(idClient);
-					if(Admin!=null) {
-						if (cliente!=null) {
-							Pedido pedido = Usuario.crearPedido(Admin);
-							VentanaPedido pedido1 = new VentanaPedido();
-							setCenter(pedido1);
-							setMargin(pedido1, i);
-							pedido1.setCliente(cliente);
-							pedido1.setAdmin(Admin);
-							pedido1.setPedido(pedido);
-						}else {
-							//dialogo de informacion
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Informacion de pedido");
-							alert.setHeaderText(null);
-							alert.setContentText("Cliente no registrado");
+					
+					try {
+						if(isNumeric(campos.get(0).getText()) && isNumeric(campos.get(1).getText())) {
+							int idAdmin = Integer.parseInt(campos.get(0).getText());
+							int idClient = Integer.parseInt(campos.get(1).getText());
+							Administrador Admin = Administrador.consultarAdmin(idAdmin);
+							Cliente cliente = Cliente.consultarCliente(idClient);
+							if(Admin!=null) {
+								if (cliente!=null) {
+									Pedido pedido = Usuario.crearPedido(Admin);
+									VentanaPedido pedido1 = new VentanaPedido();
+									setCenter(pedido1);
+									setMargin(pedido1, i);
+									pedido1.setCliente(cliente);
+									pedido1.setAdmin(Admin);
+									pedido1.setPedido(pedido);
+								}else {
+									//dialogo de informacion
+									throw new ExcepcionObjetoNoEncontrado("Cliente no encontrado");
+								}
 
-							alert.showAndWait();
-							borrar();
+							}else {
+								//dialogo de informacion
+								throw new ExcepcionObjetoNoEncontrado("Administrador no encontrado");
+							}
+						}	
 						}
-
-					}else {
-						//dialogo de informacion
-						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Informacion de pedido");
+						
+					catch(ExcepcionObjetoNoEncontrado e){
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error gravisimo");
 						alert.setHeaderText(null);
-						alert.setContentText("Administrador no registrado");
+						alert.setContentText(e.getMessage());
+
+						alert.showAndWait();
+						borrar();
+					}
+					catch(ExcepcionVerificarTipoDato a) {
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
+						alert.setHeaderText(null);
+						alert.setContentText(a.getMessage()+"\n en alguno de los campos");
 
 						alert.showAndWait();
 						borrar();
 					}
 					
+					
 				}
+					
 				
 			}
 			
@@ -1093,4 +1182,32 @@ public class VentanaPrincipal extends BorderPane {
 		}
 
 
+		private  boolean isNumeric(String cadena)throws ExcepcionVerificarTipoDato{
+			try {
+				Integer.parseInt(cadena);
+				return true;
+			} catch (NumberFormatException e){
+				throw new ExcepcionVerificarTipoDato("Tipo de dato incorrecto");
+			}
+		}
+		
+		private  boolean isDouble(String cadena)throws ExcepcionVerificarTipoDato{
+			try {
+				Double.parseDouble(cadena);
+				return true;
+			} catch (NumberFormatException e){
+				throw new ExcepcionVerificarTipoDato("Tipo de dato incorrecto");
+				
+			}
+		}
+		
+		private  boolean isLong(String cadena)throws ExcepcionVerificarTipoDato{
+			try {
+				Long.parseLong(cadena);
+				return true;
+			} catch (NumberFormatException e){
+				throw new ExcepcionVerificarTipoDato("Tipo de dato incorrecto");
+				
+			}
+		}
 }
