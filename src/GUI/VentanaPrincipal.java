@@ -651,53 +651,27 @@ public class VentanaPrincipal extends BorderPane {
 				ArrayList<TextField> campos= pane.getCampos();
 				
 				if(verificarCampos()) {
-					
-					try {
-						//agrego para verificar los datos de ID sean tipo enteros
-						if(esINT(campos.get(0).getText()) && esINT(campos.get(2).getText())) {
-							int id = Integer.parseInt(campos.get(0).getText());
-							int idc = Integer.parseInt(campos.get(2).getText());
-							Administrador admin = Administrador.consultarAdmin(id);
-							if(admin!=null) {
-								Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Resultado");
-								alert.setHeaderText(null);
-								alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
-								alert.showAndWait();
-								borrar();
-							}
-							else {
-								Alert alert = new Alert(AlertType.INFORMATION);
-								alert.setTitle("Registrar cliente dice...");
-								alert.setHeaderText(null);
-								alert.setContentText("Identificacion admin incorrecta");
-
-								alert.showAndWait();
-								borrar();
-								//System.out.println("Identificacion incorrecta");
-							}
-						}else {
-							Alert alert = new Alert(AlertType.INFORMATION);
-							alert.setTitle("Registrar cliente dice...");
-							alert.setHeaderText(null);
-							alert.setContentText("los ID no son tipo numericos");
-
-							alert.showAndWait();
-							borrar();
-							
-						}
-						
-					} catch (Exception e) {
-						// TODO: handle exception
+					int id = Integer.parseInt(campos.get(0).getText());
+					int idc = Integer.parseInt(campos.get(2).getText());
+					Administrador admin = Administrador.consultarAdmin(id);
+					if(admin!=null) {
 						Alert alert = new Alert(AlertType.INFORMATION);
-						alert.setTitle("Registrar cliente dice...");
+						alert.setTitle("Resultado");
 						alert.setHeaderText(null);
-						alert.setContentText("sale error e");
-
+						alert.setContentText(Usuario.registrarCliente(admin,campos.get(1).getText(), idc, campos.get(3).getText(), campos.get(4).getText(), campos.get(5).getText(), campos.get(6).getText() ));
 						alert.showAndWait();
 						borrar();
 					}
-					
+					else {
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Registrar cliente dice...");
+						alert.setHeaderText(null);
+						alert.setContentText("Identificacion admin incorrecta");
+
+						alert.showAndWait();
+						borrar();
+						//System.out.println("Identificacion incorrecta");
+					}
 				}
 						
 			}
