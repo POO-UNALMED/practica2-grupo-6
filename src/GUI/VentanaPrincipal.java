@@ -1091,5 +1091,28 @@ public class VentanaPrincipal extends BorderPane {
 				return false;
 			}
 		}
+		//metodo para el id es numerico INT
+		
+		/*ej:
+		 String id= "33";
+		
+		if (esINT(id)) {
+			System.out.println("es numero= "+id);
+		}else {
+			System.out.println("no es numero= "+id);
+		}
+		 */
+		
+		public static boolean esINT(String s)
+		{
+		       try
+		       {
+		           Integer.parseInt(s);
+		           return true;
+		       } catch (NumberFormatException ex)
+		       {
+		           return false;
+		       }
+		}
 
 }
