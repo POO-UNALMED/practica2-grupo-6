@@ -20,6 +20,7 @@ public class FieldPane extends HBox {
 	String [] valores;
 	boolean [] habilitado;
 	ArrayList<TextField> campos = new ArrayList<>();
+	GridPane panel;
 	
 	
 	public FieldPane(String tituloCriterios, String[] criterios, String valor,String[] valores, boolean[] habilitado) {
@@ -30,7 +31,7 @@ public class FieldPane extends HBox {
 		this.habilitado = habilitado;
 		this.valores=valores;
 		
-		GridPane panel = new GridPane();
+		panel = new GridPane();
 		panel.setVgap(5.0D);
 	    panel.setHgap(80.0D);
 	    panel.setPadding(new Insets(10,10,10,10));
@@ -59,7 +60,17 @@ public class FieldPane extends HBox {
 		    	
 			}
 	    }else {
-	    	
+	    	for (int i = 0; i < criterios.length; i++) {
+				
+	    		int num = habilitado.length;
+		    	Label valores1 = new Label(criterios[i]);
+		    	TextField campo = new TextField();
+		    	valores1.setFont(new Font("Arial",13));
+		    	panel.add(valores1, 2, num+i+1);
+		    	panel.add(campo, 3,num+i+1);
+		    	campos.add(campo);
+		    	
+			}
 	    }
 	    
 	    
@@ -73,6 +84,20 @@ public class FieldPane extends HBox {
 	
 	public String[] getCriterios(){
 		return criterios;
+	}
+	
+	public void datosNoEditables(Object[] datos,String[] campos) {
+		for (int i = 0; i < habilitado.length; i++) {
+			
+	    	Label valores1 = new Label(campos[i]);
+	    	TextField campo = new TextField();
+	    	valores1.setFont(new Font("Arial",13));
+	    	campo.setText((String)datos[i]);
+	    	campo.setEditable(false);
+	    	panel.add(valores1, 2, i+1);
+	    	panel.add(campo, 3,i+1);
+	    	
+		}
 	}
 	
 	

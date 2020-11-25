@@ -64,7 +64,7 @@ public class VentanaPrincipal extends BorderPane {
 				
 				BorderPane p = new BorderPane();
 				p.setCenter(new VentanaInicio());
-				Scene scene1 = new Scene(p,700,500);
+				Scene scene1 = new Scene(p,750,600);
 				Main.window.setScene(scene1);;			
 			}
 			
@@ -269,7 +269,11 @@ public class VentanaPrincipal extends BorderPane {
 					String[] criterios = {"ID Administrador","Nombre","Marca","Tipo","Cantidad","Precio"};
 					BorderPane panel = new BorderPane();
 					//agregue este pane
-					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					boolean[] habilitado = {true};
+					pane = new FieldPane("criterio",criterios,"valor",null,habilitado);
+					Object[] d = {Producto.getCodigo_de_barras1()+""}; 
+					String [] c = {"Codigo"};
+					pane.datosNoEditables(d, c);
 					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);
@@ -310,7 +314,12 @@ public class VentanaPrincipal extends BorderPane {
 					
 					String[] criterios = {"ID Administrador","ID Cliente"};
 					BorderPane panel = new BorderPane();
-					pane = new FieldPane("criterio",criterios,"valor",null,null);
+					
+					boolean[] habilitado = {true};
+					pane = new FieldPane("criterio",criterios,"valor",null,habilitado);
+					Object[] d = {Pedido.getNpedido1()+""}; 
+					String [] c = {"Codigo"};
+					pane.datosNoEditables(d, c);
 					panel.setCenter(pane);
 					
 					Rectangle rt2 = new Rectangle(500,290,Color.TRANSPARENT);

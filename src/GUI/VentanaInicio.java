@@ -32,7 +32,7 @@ public class VentanaInicio  extends BorderPane {
 	
 	Scene scene, scene1;
 	Label Hvida;
-	ImageView v1;
+	ImageView v1,v2,v3,v4;
 	int contador=0;
 	
 	public VentanaInicio(){
@@ -81,6 +81,7 @@ public class VentanaInicio  extends BorderPane {
 		p4.setCenter(v);
 		p4.setMargin(v, i);
 		
+		
 		p1.setAlignment(Pos.TOP_CENTER);
 		p1.getChildren().addAll(sp,p4);
 		
@@ -109,9 +110,24 @@ public class VentanaInicio  extends BorderPane {
 	    v1 = new ImageView();
 	    v1.setImage(m1);
 	    v1.setFitWidth(135);
-		v1.setFitHeight(150);
-	    p6.add(v1, 0, 0);
+		v1.setFitHeight(135);
 		
+		v2 = new ImageView();
+		v2.setFitWidth(135);
+		v2.setFitHeight(135);
+		
+		v3 = new ImageView();
+		v3.setFitWidth(135);
+		v3.setFitHeight(135);
+		
+		v4 = new ImageView();
+		v4.setFitWidth(135);
+		v4.setFitHeight(135);
+		
+	    p6.add(v1, 1, 0);
+		p6.add(v2, 2, 0);
+		p6.add(v3, 1, 1);
+		p6.add(v4, 2, 1);
 		p2.getChildren().addAll(p5,p6);
 		
 		//menu
@@ -177,7 +193,10 @@ public class VentanaInicio  extends BorderPane {
 						+ "\nCorreo: dachamorroru@unal.edu.co"
 						+ "\nCarrera: Ingenieria en sistemas"
 						+ "\nPasatiempo: futbol");
-				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner.jpg")));
+				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner1.jpeg")));
+				v2.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner2.jpeg")));
+				v3.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner3.jpeg")));
+				v4.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner4.jpeg")));
 				contador++;
 			}else if(contador==2) {
 				Hvida.setText("Nombre: Daniel Torres"
@@ -185,6 +204,7 @@ public class VentanaInicio  extends BorderPane {
 						+ "\nCarrera: Ingenieria en sistemas"
 						+ "\nPasatiempo: Dibujar");
 				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel.jpg")));
+				v2.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner.jpg")));
 				contador=0;
 			}
 			

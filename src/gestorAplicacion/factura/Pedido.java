@@ -157,7 +157,9 @@ public class Pedido implements Serializable {
 	public static void setNpedido(int npedido) {
 		Npedido = npedido;
 	}
-
 	
+	static public int getNpedido1() {
+		return Npedido;
+	}
 	
 }

@@ -147,7 +147,7 @@ public class Main extends Application{
 		
 		BorderPane p = new BorderPane();
 		p.setCenter(new VentanaInicio());
-		Scene scene1 = new Scene(p,700,500);
+		Scene scene1 = new Scene(p,720,550);
 		
 		window.setScene(scene1);
 		window.show();
