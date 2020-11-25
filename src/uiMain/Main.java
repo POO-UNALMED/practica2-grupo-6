@@ -279,7 +279,7 @@ public class Main extends Application{
         					System.out.println("Ingrese cantidad a llevar: ");
         					int cantidad = entrada.nextInt();
         					
-        					System.out.println(p.Agregar_producto(codigo, cantidad));
+        					//System.out.println(p.Agregar_producto(codigo, cantidad));
         				}else {
         					System.out.println("No hay productos en el inventario");
         				}
@@ -410,7 +410,7 @@ public class Main extends Application{
     				System.out.println("Ingrese la cantidad de devolucion");
     				int cantidad = entrada.nextInt();
     				
-    				System.out.println(Usuario.devolucion(Nfactura, codigoPro, cantidad));
+    				//System.out.println(Usuario.devolucion(Nfactura, codigoPro, cantidad));
     			}else {
     				System.out.println("producto no encontrado");
     			}

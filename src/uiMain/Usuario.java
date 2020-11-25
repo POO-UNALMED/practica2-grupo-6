@@ -5,6 +5,7 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Excepciones.ExcepcionCantidad;
 import Excepciones.ExcepcionFecha;
 import gestorAplicacion.cliente.*;
 import gestorAplicacion.factura.*;
@@ -36,7 +37,7 @@ public class Usuario {
     	}
 	}
 	
-	 static public String devolucion(int codFac, int codProd, int cantidad) {        //
+	 static public String devolucion(int codFac, int codProd, int cantidad) throws  ExcepcionCantidad{        //
 		Factura d1 = Factura.consultarFactura(codFac);
 		if(d1 != null) {
 			Pedido p = d1.getPedido();
@@ -49,7 +50,7 @@ public class Usuario {
 					return "Devolucion exitosa";
 				}
 				else {
-					return "cantidad de devolucion no es correcta";
+					throw new ExcepcionCantidad("Cantidad Incorrecta");
 				}
 			}else {
 				return "Producto no encontrado";

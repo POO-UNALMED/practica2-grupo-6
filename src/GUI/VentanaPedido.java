@@ -3,6 +3,7 @@ package GUI;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import Excepciones.ExcepcionCantidad;
 import gestorAplicacion.cliente.Administrador;
 import gestorAplicacion.cliente.Cliente;
 import gestorAplicacion.factura.Factura;
@@ -32,14 +33,14 @@ public class VentanaPedido extends VBox{
 	private Cliente cliente;
 	private Pedido pedido;
 	private FieldPane pane;
-	
+	private BorderPane panel;
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
 	}
 
 	public VentanaPedido () {
 		super(10);
-		BorderPane panel = new BorderPane();
+		panel = new BorderPane();
 		
 		Label text = new Label("Registrar Productos");
 		text.setFont(new Font("Arial",16));
@@ -84,30 +85,40 @@ public class VentanaPedido extends VBox{
 		@Override
 		public void handle(ActionEvent event) {
 			ArrayList<TextField> campos = pane.getCampos();
-			if(!Producto.getProductos().isEmpty()) {
-				long codigo = Long.parseLong(campos.get(0).getText());
-				int cantidad = Integer.parseInt(campos.get(1).getText());
-				
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Pedido");
-				alert.setHeaderText(null);
-				alert.setContentText(pedido.Agregar_producto(codigo, cantidad));
+			try {
+				if(!Producto.getProductos().isEmpty()) {
+					long codigo = Long.parseLong(campos.get(0).getText());
+					int cantidad = Integer.parseInt(campos.get(1).getText());
+					
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Pedido");
+					alert.setHeaderText(null);
+					alert.setContentText(pedido.Agregar_producto(codigo, cantidad));
 
-				alert.showAndWait();
-			}else {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Pedido");
+					alert.showAndWait();
+				}else {
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Pedido");
+					alert.setHeaderText(null);
+					alert.setContentText("No hay productos en el inventario");
+
+					alert.showAndWait();
+				}
+				
+				for (int i = 0; i < campos.size(); i++) {
+					campos.get(i).setText("");
+				
+				
+			}
+			}catch(ExcepcionCantidad e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle(e.getMessage());
 				alert.setHeaderText(null);
-				alert.setContentText("No hay productos en el inventario");
+				alert.setContentText(e.getMessage());
 
 				alert.showAndWait();
 			}
-			
-			for (int i = 0; i < campos.size(); i++) {
-				campos.get(i).setText("");
-			
-			
-		}}
+			}
 		
 	};
 	
@@ -130,6 +141,11 @@ public class VentanaPedido extends VBox{
 				alert.setContentText(pedido.getFactura().imprimirFactura());
 
 				alert.showAndWait();
+				
+				Label texto = new Label("Pedido Realizado Correctamente");
+				texto.setFont(new Font("Arial",20));
+				panel.setCenter(texto);
+				panel.setBottom(null);
 			}
 			
 		}

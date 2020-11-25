@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import Excepciones.ExcepcionCantidad;
 import gestorAplicacion.cliente.Administrador;
 import gestorAplicacion.cliente.Cliente;
 
@@ -34,7 +35,7 @@ public class Pedido implements Serializable {
 	}
 	
 	
-	public String Agregar_producto(long codigo,int cantidad) {
+	public String Agregar_producto(long codigo,int cantidad) throws  ExcepcionCantidad{
 		Producto p=Producto.consultarProducto(codigo);
 		if(p!=null) {
 			if(cantidad<=p.getCantidad()) {
@@ -42,7 +43,7 @@ public class Pedido implements Serializable {
 				DetalleProductos.add(d);
 				return "producto agregado";
 			}else {
-				return"Supero la cantidad en el inventario";
+				throw new ExcepcionCantidad("Cantidad Incorrecta");
 			}
 		}else {
 			return"Producto no encontrado";

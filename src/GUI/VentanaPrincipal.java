@@ -3,6 +3,7 @@ package GUI;
 import java.util.ArrayList;
 
 import Excepciones.ExcepcionCamposVacios;
+import Excepciones.ExcepcionCantidad;
 import Excepciones.ExcepcionFecha;
 import Excepciones.ExcepcionObjetoNoEncontrado;
 import Excepciones.ExcepcionVerificarTipoDato;
@@ -896,6 +897,14 @@ public class VentanaPrincipal extends BorderPane {
 
 						alert.showAndWait();
 						borrar();
+					}catch(ExcepcionCantidad f) {
+						Alert alert = new Alert(AlertType.WARNING);
+						alert.setTitle("Error Gravisimo");
+						alert.setHeaderText(null);
+						alert.setContentText(f.getMessage());
+
+						alert.showAndWait();
+						
 					}
 						
 				}
