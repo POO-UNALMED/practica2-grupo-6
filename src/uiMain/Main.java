@@ -154,11 +154,11 @@ public class Main extends Application{
 
 	public void start(Stage myStage) throws Exception{
 		window = myStage;
-		window.setTitle("Aplicacion");
+		window.setTitle("Inicio");
 		
 		BorderPane p = new BorderPane();
 		p.setCenter(new VentanaInicio());
-		Scene scene1 = new Scene(p,720,550);
+		Scene scene1 = new Scene(p,720,520);
 		
 		window.setScene(scene1);
 		window.show();

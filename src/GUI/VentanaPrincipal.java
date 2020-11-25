@@ -55,7 +55,7 @@ public class VentanaPrincipal extends BorderPane {
 		//archivo
 		Menu menu1 = new Menu("Archivo");
 		MenuItem usuario = new MenuItem("Usuario");
-		//acionar boton usuario
+		//accionar boton usuario
 		usuario.setOnAction(menu);
 		SeparatorMenuItem separator = new SeparatorMenuItem();
 		MenuItem salir = new MenuItem("Salir");
@@ -67,8 +67,9 @@ public class VentanaPrincipal extends BorderPane {
 				
 				BorderPane p = new BorderPane();
 				p.setCenter(new VentanaInicio());
-				Scene scene1 = new Scene(p,750,600);
-				Main.window.setScene(scene1);;			
+				Scene scene1 = new Scene(p,750,520);
+				Main.window.setScene(scene1);
+				Main.window.setTitle("Inicio");
 			}
 			
 		});

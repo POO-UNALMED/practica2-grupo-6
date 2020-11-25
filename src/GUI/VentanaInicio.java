@@ -57,6 +57,7 @@ public class VentanaInicio  extends BorderPane {
 				v.getChildren().addAll(new Node[] { new VentanaPrincipal() });
 				Scene scene2 = new Scene(v,700,600);
 				Main.window.setScene(scene2);
+				Main.window.setTitle("CompuElectronics");
 			}
 			
 		});
