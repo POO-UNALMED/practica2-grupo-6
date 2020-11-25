@@ -932,10 +932,27 @@ public class VentanaPrincipal extends BorderPane {
 				    			ArrayList<Producto> Productos = Usuario.mercanciaMuerta(fecha1, fecha2);
 				    			
 				    			if(!Productos.isEmpty()) {
-				    				System.out.println("Nombre   Codido de barras   Cantidad en inventario");
+				    				String s = "Nombre   Codido de barras   Cantidad en inventario";
 				            		for (int i = 0; i < Productos.size(); i++) {
-										System.out.println(Productos.get(i).toString());
+										s+="\n"+Productos.get(i).toString();
+										
 				    			}
+				            		consultas = new VBox(10);
+									nombre.setText("Lista de Productos");
+									descripcion.setText(s);
+									
+									Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+									rt.setStroke(Color.GRAY);
+									StackPane sp = new StackPane(new Node[] { rt, nombre });
+									
+									Rectangle rt1 = new Rectangle(600,400,Color.TRANSPARENT);
+									rt1.setStroke(Color.GRAY);
+									StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+									
+									consultas.getChildren().addAll(sp,sp1);
+									setCenter(consultas);
+									setMargin(consultas, i);
+									
 									}else {
 										//dialogo de informacion
 										Alert alert = new Alert(AlertType.INFORMATION);
