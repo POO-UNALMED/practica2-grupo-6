@@ -2,6 +2,7 @@ package uiMain;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Excepciones.ExcepcionesArchivosBasesDatos;
 import BaseDatos.Persistencia;
 import GUI.VentanaInicio;
 import gestorAplicacion.cliente.*;
@@ -47,7 +48,17 @@ public class Main extends Application{
 	
 	static Scanner entrada = new Scanner(System.in);
 	static {
-		Persistencia.leerArchivos();
+		try {
+			Persistencia.leerArchivos();
+		} catch (ExcepcionesArchivosBasesDatos e) {
+			// TODO Auto-generated catch block
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error Gravisimo");
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			
+		}
 		Persistencia.reasignar();
 	}
 	
@@ -155,7 +166,16 @@ public class Main extends Application{
 	}
 	
 	public void stop() {
-		Persistencia.guardarArchivos();
+		try {
+			Persistencia.guardarArchivos();
+		} catch (ExcepcionesArchivosBasesDatos e) {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Error Gravisimo");
+			alert.setHeaderText(null);
+			alert.setContentText(e.getMessage());
+			alert.showAndWait();
+			
+		}
 	}	
 	
 	
