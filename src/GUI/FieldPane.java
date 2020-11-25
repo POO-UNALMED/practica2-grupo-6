@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+// Formularios
 public class FieldPane extends HBox {
 	
 	String tituloCriterios;

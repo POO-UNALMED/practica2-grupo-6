@@ -28,6 +28,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import uiMain.Main;
 
+//esta clase se encuentra la presentacion y boton siguiente
 public class VentanaInicio  extends BorderPane {
 	
 	Scene scene, scene1;

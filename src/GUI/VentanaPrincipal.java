@@ -1,5 +1,7 @@
 package GUI;
 
+
+//Esta clase define a los procesos y consultas, ademas controla los eventos que se muestran en la interfaz grafica
 import java.util.ArrayList;
 
 import Excepciones.ExcepcionCamposVacios;
@@ -458,13 +460,30 @@ public class VentanaPrincipal extends BorderPane {
 							
 					
 						}
+						
+						consultas = new VBox(10);
+						nombre.setText("Clientes Mayoritarios");
+						descripcion.setText(lista);
+						
+						Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+						rt.setStroke(Color.GRAY);
+						StackPane sp = new StackPane(new Node[] { rt, nombre });
+						
+						Rectangle rt1 = new Rectangle(600,400,Color.TRANSPARENT);
+						rt1.setStroke(Color.GRAY);
+						StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+						
+						consultas.getChildren().addAll(sp,sp1);
+						setCenter(consultas);
+						setMargin(consultas, i);
+						/*
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("Resultado");
 						alert.setHeaderText(null);
 						alert.setContentText(lista);
 						alert.getDialogPane().setPrefSize(500, 150);
 						alert.showAndWait();
-						
+						*/
 						
 					}else {
 						
@@ -1010,7 +1029,23 @@ public class VentanaPrincipal extends BorderPane {
 			    	try {
 			    		if(Usuario.confirmarFechas(f1, f2)) {
 			    			if(!Factura.rangoDeFacturas(f1, f2).isEmpty()) {
-				    			System.out.println(Usuario.Balance(f1, f2));
+			    				
+			    				consultas = new VBox(10);
+								nombre.setText("BALANCES");
+								descripcion.setText(Usuario.Balance(f1, f2));
+								
+								Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+								rt.setStroke(Color.GRAY);
+								StackPane sp = new StackPane(new Node[] { rt, nombre });
+								
+								Rectangle rt1 = new Rectangle(600,400,Color.TRANSPARENT);
+								rt1.setStroke(Color.GRAY);
+								StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+								
+								consultas.getChildren().addAll(sp,sp1);
+								setCenter(consultas);
+								setMargin(consultas, i);
+				    			//System.out.println(Usuario.Balance(f1, f2));
 				    			
 				        		}else {
 				        			//dialogo de informacion
@@ -1053,10 +1088,31 @@ public class VentanaPrincipal extends BorderPane {
 							if(!Factura.rangoDeFacturas(fechan, fechan2).isEmpty()) {
 				    			ArrayList<Producto> Productos = Usuario.productosMasVendidos(fechan, fechan2);
 				    			if(!Productos.isEmpty()) {
+				    				
+				    				String s = "Nombre   Codido de barras   Cantidad";
+				            		for (int i = 0; i < Productos.size(); i++) {
+										s+="\n"+Productos.get(i).toString();}
+				            		consultas = new VBox(10);
+									nombre.setText("Lista de Productos");
+									descripcion.setText(s);
+									
+									Rectangle rt = new Rectangle(250,50,Color.TRANSPARENT);
+									rt.setStroke(Color.GRAY);
+									StackPane sp = new StackPane(new Node[] { rt, nombre });
+									
+									Rectangle rt1 = new Rectangle(600,400,Color.TRANSPARENT);
+									rt1.setStroke(Color.GRAY);
+									StackPane sp1 = new StackPane(new Node[] { rt1, descripcion });
+									
+									consultas.getChildren().addAll(sp,sp1);
+									setCenter(consultas);
+									setMargin(consultas, i);
+				    				/*
 				    				System.out.println("Nombre   Codido de barras   Cantidad");
 				            		for (int i = 0; i < Productos.size(); i++) {
 										System.out.println(Productos.get(i).toString());
 										}
+										*/
 				    			}else {
 				    				//dialogo de informacion
 									Alert alert = new Alert(AlertType.INFORMATION);
@@ -1174,7 +1230,7 @@ public class VentanaPrincipal extends BorderPane {
 			}
 			
 		};
-		
+		//metodo de restablecer los formularios
 		private void borrar() {
 			campos =pane.getCampos();
 			for (int i = 0; i < campos.size(); i++) {
@@ -1182,7 +1238,7 @@ public class VentanaPrincipal extends BorderPane {
 			}
 		}
 		
-		
+		//metodo de verificacion  
 		public boolean verificarCampos() {
 			campos = pane.getCampos();
 			String camposFaltantes = "";
@@ -1216,7 +1272,7 @@ public class VentanaPrincipal extends BorderPane {
 			}
 		}
 
-
+		//Metodos de verificaion tipos de datos
 		private  boolean isNumeric(String cadena)throws ExcepcionVerificarTipoDato{
 			try {
 				Integer.parseInt(cadena);
