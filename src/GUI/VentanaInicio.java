@@ -33,8 +33,8 @@ public class VentanaInicio  extends BorderPane {
 	
 	Scene scene, scene1;
 	Label Hvida;
-	ImageView v1,v2,v3,v4;
-	int contador=0;
+	ImageView v1,v2,v3,v4,v;
+	int contador=0,cont=0;
 	
 	public VentanaInicio(){
 		
@@ -71,15 +71,16 @@ public class VentanaInicio  extends BorderPane {
 		Insets i = new Insets(10);
 		
 		Image image = new Image(getClass().getResourceAsStream("../imagenes/celular.jpg"));
-		ImageView v = new ImageView();
+		v = new ImageView();
 		
-		//accion
-		v.setOnMouseMoved(mouseHandler);
+		
 		
 		
 		v.setImage(image);
 		v.setFitWidth(185);
 		v.setFitHeight(200);
+		//accion
+		v.setOnMouseMoved(mouseHandler);
 		
 		p4.setAlignment(b1, Pos.BOTTOM_RIGHT);
 		p4.setBottom(b1);
@@ -235,7 +236,22 @@ public class VentanaInicio  extends BorderPane {
         public void handle(MouseEvent mouseEvent) {
         	
             if (mouseEvent.getEventType()!= null) {
-            	System.out.println("se movio");
+            	if(cont==0) {
+            		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/cel.jpg")));
+            		cont++;
+            	}else if(cont==1) {
+            		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/imagen1.jpeg")));
+            		cont++;
+            	}else if(cont==2) {
+            		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/imagen2.jpeg")));
+            		cont++;
+            	}else if(cont==3) {
+            		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/imagen3.jpeg")));
+            		cont++;
+            	}else if(cont==4) {
+            		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/CELULAR.jpg")));
+            		cont=0;
+            	}
             }
         }
     };
