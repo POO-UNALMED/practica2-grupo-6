@@ -236,19 +236,19 @@ public class VentanaInicio  extends BorderPane {
         public void handle(MouseEvent mouseEvent) {
         	
             if (mouseEvent.getEventType()!= null) {
-            	if(cont==0) {
+            	if(cont>=0&&cont<=20) {
             		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/cel.jpg")));
             		cont++;
-            	}else if(cont==1) {
+            	}else if(cont>20&&cont<=40) {
             		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/imagen1.jpeg")));
             		cont++;
-            	}else if(cont==2) {
+            	}else if(cont>40&&cont<=60) {
             		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/imagen2.jpeg")));
             		cont++;
-            	}else if(cont==3) {
+            	}else if(cont>60&&cont<=80) {
             		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/imagen3.jpeg")));
             		cont++;
-            	}else if(cont==4) {
+            	}else if(cont>80&&cont<=100) {
             		v.setImage(new Image(getClass().getResourceAsStream("../imagenes/CELULAR.jpg")));
             		cont=0;
             	}
