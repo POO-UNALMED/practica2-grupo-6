@@ -108,9 +108,8 @@ public class VentanaInicio  extends BorderPane {
 		p6.setVgap(5.0D);
 	    p6.setHgap(4.0D);
 	    
-	    Image m1 = new Image(getClass().getResourceAsStream("../imagenes/daniel.jpg"));
+	   
 	    v1 = new ImageView();
-	    v1.setImage(m1);
 	    v1.setFitWidth(135);
 		v1.setFitHeight(135);
 		
@@ -125,6 +124,11 @@ public class VentanaInicio  extends BorderPane {
 		v4 = new ImageView();
 		v4.setFitWidth(135);
 		v4.setFitHeight(135);
+		
+		v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel1.jpeg")));
+		v2.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel2.jpeg")));
+		v3.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel3.jpeg")));
+		v4.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel4.jpeg")));
 		
 	    p6.add(v1, 1, 0);
 		p6.add(v2, 2, 0);
@@ -188,11 +192,14 @@ public class VentanaInicio  extends BorderPane {
 						+ "\nCorreo: dachamorroru@unal.edu.co"
 						+ "\nCarrera: Ingenieria en sistemas"
 						+ "\nPasatiempo: futbol");
-				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/deninson.jpg")));
+				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/deninson1.jpeg")));
+				v2.setImage(new Image(getClass().getResourceAsStream("../imagenes/deninson2.jpeg")));
+				v3.setImage(new Image(getClass().getResourceAsStream("../imagenes/deninson3.jpeg")));
+				v4.setImage(new Image(getClass().getResourceAsStream("../imagenes/deninson4.jpeg")));
 				contador++;
 			}else if(contador==1) {
 				Hvida.setText("Nombre: Deyner Lopez"
-						+ "\nCorreo: dachamorroru@unal.edu.co"
+						+ "\nCorreo: deelopezpi@unal.edu.co"
 						+ "\nCarrera: Ingenieria en sistemas"
 						+ "\nPasatiempo: futbol");
 				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner1.jpeg")));
@@ -205,8 +212,10 @@ public class VentanaInicio  extends BorderPane {
 						+ "\nCorreo: dtorresag@unal.edu.co"
 						+ "\nCarrera: Ingenieria en sistemas"
 						+ "\nPasatiempo: Dibujar");
-				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel.jpg")));
-				v2.setImage(new Image(getClass().getResourceAsStream("../imagenes/deyner.jpg")));
+				v1.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel1.jpeg")));
+				v2.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel2.jpeg")));
+				v3.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel3.jpeg")));
+				v4.setImage(new Image(getClass().getResourceAsStream("../imagenes/daniel4.jpeg")));
 				contador=0;
 			}
 			
