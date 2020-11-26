@@ -49,7 +49,15 @@ public class Main extends Application{
 	static Scanner entrada = new Scanner(System.in);
 	static {
 		
-			Persistencia.leerArchivos();
+			try {
+				Persistencia.leerArchivos();
+			} catch (ExcepcionesArchivosBasesDatos e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error Gravisimo");
+				alert.setHeaderText(null);
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
+			}
 	
 		Persistencia.reasignar();
 	}
@@ -77,7 +85,15 @@ public class Main extends Application{
 	public void stop() {
 		//se guardan los archivos al cerrar la aplicacion 
 		
-			Persistencia.guardarArchivos();
+			try {
+				Persistencia.guardarArchivos();
+			} catch (ExcepcionesArchivosBasesDatos e) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Error Gravisimo");
+				alert.setHeaderText(null);
+				alert.setContentText(e.getMessage());
+				alert.showAndWait();
+			}
 		
 	}	
 	
