@@ -13,7 +13,7 @@ import gestorAplicacion.factura.Pedido;
 import gestorAplicacion.factura.Producto;
 
 public class Persistencia {
-	public static void guardarArchivos () throws ExcepcionesArchivosBasesDatos{												
+	public static void guardarArchivos () {												
 		ObjectOutputStream escribir;
 		File Adminis = new File("src\\BaseDatos\\temp\\Administradores.txt");
 		File cl = new File("src\\BaseDatos\\temp\\Clientes.txt");
@@ -29,7 +29,7 @@ public class Persistencia {
 				
 			}
 			catch(IOException e){
-				throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo administrador");
+				//throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo administrador");
 				
 			}
 		}
@@ -42,7 +42,7 @@ public class Persistencia {
 			
 		}
 		catch(IOException p){
-			throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura administrador");
+			//throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura administrador");
 			
 			
 		}
@@ -52,7 +52,7 @@ public class Persistencia {
 				cl.createNewFile();
 			}
 			catch(IOException e){
-				throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo cliente");
+				//throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo cliente");
 				
 			}
 		}
@@ -64,7 +64,7 @@ public class Persistencia {
 			
 		}
 		catch(IOException p){
-			throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura cliente");
+			//throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura cliente");
 			
 		}
 		
@@ -74,7 +74,7 @@ public class Persistencia {
 				dtpedido.createNewFile();
 			}
 			catch(IOException e){
-				throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo pedido");
+				//throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo pedido");
 				
 			}
 		}
@@ -86,7 +86,7 @@ public class Persistencia {
 			
 		}
 		catch(IOException p){
-			throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura pedido");
+			//throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura pedido");
 		}
 		
 		
@@ -95,7 +95,7 @@ public class Persistencia {
 				factura1.createNewFile();
 			}
 			catch(IOException e){
-				throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo factura");
+				//throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo factura");
 				
 			}
 		}
@@ -107,7 +107,7 @@ public class Persistencia {
 			
 		}
 		catch(IOException p){
-			throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura factura");
+			//throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura factura");
 		}
 		
 		
@@ -116,7 +116,7 @@ public class Persistencia {
 				Pedido1.createNewFile();
 			}
 			catch(IOException e){
-				throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo Pedido");
+				//throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo Pedido");
 			}
 		}
 		try {
@@ -127,7 +127,7 @@ public class Persistencia {
 			
 		}
 		catch(IOException p){
-			throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura Pedido");
+			//throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura Pedido");
 		}
 		
 		//
@@ -136,7 +136,7 @@ public class Persistencia {
 				producto1.createNewFile();
 			}
 			catch(IOException e){
-				throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo producto1");
+				//throw new ExcepcionesArchivosBasesDatos("No se pudo crear archivo producto1");
 			}
 		}
 		try {
@@ -147,14 +147,14 @@ public class Persistencia {
 			
 		}
 		catch(IOException p){
-			throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura producto1");
+			//throw new ExcepcionesArchivosBasesDatos("Se ha generado un error en escritura producto1");
 		}
 	}
 	
 	
 	
 	
-	public static void leerArchivos() throws ExcepcionesArchivosBasesDatos {
+	public static void leerArchivos()  {
 		ObjectInputStream leer;
 		File Admin = new File("src\\BaseDatos\\temp\\Administradores.txt");
 		File cl = new File("src\\BaseDatos\\temp\\Clientes.txt");
@@ -168,7 +168,7 @@ public class Persistencia {
 				Admin.createNewFile();													
 				
 			}catch(Exception e) {
-				throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+				//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 			}
 		}
 		
@@ -180,7 +180,7 @@ public class Persistencia {
 			Administrador.setAdministradores(Admins);
 			
 		}catch(Exception e) {
-			throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+			//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 		}
 		
 		//
@@ -190,7 +190,7 @@ public class Persistencia {
 				cl.createNewFile();
 				
 			}catch(Exception e) {
-				throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+				//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 			}
 		}
 		
@@ -203,7 +203,7 @@ public class Persistencia {
 			leer.close();
 			
 		}catch(Exception e) {
-			throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+			//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 		}
 		
 		//
@@ -213,7 +213,7 @@ public class Persistencia {
 				dtpedido2.createNewFile();
 				
 			}catch(Exception e) {
-				throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+				//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 			}
 		}
 		
@@ -226,7 +226,7 @@ public class Persistencia {
 			leer.close();
 			
 		}catch(Exception e) {
-			throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+			//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 		}
 		
 		//
@@ -236,7 +236,7 @@ public class Persistencia {
 				factura2.createNewFile();
 				
 			}catch(Exception e) {
-				throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+				//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 			}
 		}
 		
@@ -249,7 +249,7 @@ public class Persistencia {
 			leer.close();
 			
 		}catch(Exception e) {
-			throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+			//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 		}
 		
 		//
@@ -259,7 +259,7 @@ public class Persistencia {
 				Pedido2.createNewFile();
 				
 			}catch(Exception e) {
-				throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+				//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 			}
 		}
 		
@@ -272,7 +272,7 @@ public class Persistencia {
 			leer.close();
 			
 		}catch(Exception e) {
-			throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+			//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 		}
 		
 		//
@@ -282,7 +282,7 @@ public class Persistencia {
 				producto2.createNewFile();
 				
 			}catch(Exception e) {
-				throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+				//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 			}
 		}
 		
@@ -295,7 +295,7 @@ public class Persistencia {
 			leer.close();
 			
 		}catch(Exception e) {
-			throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
+			//throw new ExcepcionesArchivosBasesDatos("Archivo no enconotrado");
 		}
 		
 		
