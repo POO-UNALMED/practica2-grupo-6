@@ -72,6 +72,11 @@ public class VentanaInicio  extends BorderPane {
 		
 		Image image = new Image(getClass().getResourceAsStream("../imagenes/celular.jpg"));
 		ImageView v = new ImageView();
+		
+		//accion
+		v.setOnMouseMoved(mouseHandler);
+		
+		
 		v.setImage(image);
 		v.setFitWidth(185);
 		v.setFitHeight(200);
@@ -183,6 +188,7 @@ public class VentanaInicio  extends BorderPane {
 		
 	};
 	
+	
 	EventHandler<MouseEvent> mouseHvida = new EventHandler<MouseEvent>() {
 
 		@Override
@@ -222,6 +228,17 @@ public class VentanaInicio  extends BorderPane {
 		}
 		
 	};
+	
+	//imagenes moved
+	EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+        	
+            if (mouseEvent.getEventType()!= null) {
+            	System.out.println("se movio");
+            }
+        }
+    };
 
 	
 	
